@@ -36,11 +36,3 @@ insert into public.usuarios (usuario, clave, estado) values
 	('user', 'user', 1),
 	('visita', 'visita', 1);
 
-insert into public.manzana(id_mzna, id_sector, cod_mzna, geom) values
-    ('14010199001','14010199','001',ST_GeomFromText('POLYGON((-79.876263664 -6.782149091, -79.87613819539547 -6.781957661254761, -79.875967348 -6.781976036, -79.875591271 -6.782032621, -79.875676634 -6.782066982, -79.875923454 -6.78214675, -79.876251182 -6.782172355, -79.876263664 -6.782149091))', 4326));
-
-insert into public.sitiointeres(tipo, nombre, descripcion, geom) values
-     ('ALAMEDA','DE LOS DESCALZOS','ALAMEDA DE LOS DESCALZOS',ST_GeomFromText('POINT(-79.8759913444519 -6.780428177883498)', 4326));
-
-insert into public.vias(tipo, nombre, via, geom) values
-	('CA','SAN MARTIN','CA SAN MARTIN',ST_GeomFromText('LINESTRING(-79.8759913444519 -6.780428177883498, -79.87529397010803 -6.7803749088932195, -79.87431764602661 -6.780193794282247)', 4326))
