@@ -1,1 +1,1 @@
-# mapa-web
+El presente proyecto busca desarrollar un mapa web funcional y atractivo que proporcione información geoespacial relevante, que promueva la interacción de los usuarios y el municipio con el objetivo de mejorar la calidad de vida de los vecinos del departamento y contribuir al crecimiento económico y cultural del mismo. 
