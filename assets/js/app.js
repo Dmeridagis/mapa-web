@@ -191,6 +191,63 @@ $.getJSON("report/sitios.php", function (data) {
   map.addLayer(sitiosLayer);
 });
 
+
+
+
+//Salud
+
+var saludLayer = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: "assets/img/add.png",
+        iconSize: [24, 28],
+        iconAnchor: [12, 28],
+        popupAnchor: [0, -25]
+      }),
+      title: feature.properties.nombre,
+      riseOnHover: true
+    });
+  },
+
+
+  onEachFeature: function (feature, layer) {
+    buscarSitio.push({
+      name: layer.feature.properties.nombre,
+      source: "Salud",
+      id: L.stamp(layer)
+    });
+  
+    layer.bindPopup(
+      "<div style='text-align:center'><h3>" +
+      '<button type="button" onclick="document.getElementById(\'nuevositioModal\').style.display=\'block\'; setTimeout(mapSitio.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevositioModal">C</button> ' +
+      '<a href="report/editaSitio.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
+      '<a href="report/eliminaSitio.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
+      "<table>" +
+      "<tr><td>Código: " + feature.properties.id + "</td></tr>" +
+      "<tr><td>Nombre: " + feature.properties.nombre + "</td></tr>" +
+      "<tr><td>Domicilio: " + feature.properties.domicilio + "</td></tr>" +
+      "<tr><td>Teléfono: " + feature.properties.telefono + "</td></tr>" +
+      "</table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
+  }
+  
+
+});
+
+
+
+$.getJSON("report/salud.php", function (data) {
+  saludLayer.addData(data);
+  map.addLayer(saludLayer);
+});
+
+
+
+
+
 /*
 imagenUrl = 'images/imagen2.jpg';
 limiteImagen = [[-6.783495,-79.878558], [-6.779442,-79.871314]];
@@ -270,11 +327,12 @@ var baseLayers = {
 
 var groupedOverlays = {
   "Puntos de interes": {
-    "<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Sitios": sitios
+    "<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Sitios": sitios,
+    "Salud": saludLayer
 	//"<img src='assets/img/planet.png' width='24' height='28'>&nbsp;Sitios de interes": sitiosLayer
   },
   "Capas": {
-  "Manzanas": manzanas,
+  "cuadra": manzanas,
     "Calles": calles
   }
 };
