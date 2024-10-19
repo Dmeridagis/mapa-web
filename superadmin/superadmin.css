@@ -6,8 +6,8 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #eaf2f8;
     color: #333;
 }
 
@@ -17,7 +17,7 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 /* Header styles */
@@ -44,24 +44,29 @@ header nav a:hover {
     color: #e74c3c;
 }
 
-/* Search container styles */
+/* Contenedor de búsqueda */
 .search-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
 }
 
 .search-container label {
     font-weight: bold;
     margin-right: 10px;
+    color: #2c3e50;
 }
 
 .search-container input {
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 300px;
+    border-radius: 25px; /* Bordes más redondeados */
+    width: 320px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: box-shadow 0.3s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.4); /* Efecto de foco */
 }
 
 .btn-crear {
