@@ -1,0 +1,124 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #e74c3c;
+}
+
+/* Search container */
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.search-container input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-filter input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Table styles */
+.auditoria-list-container {
+    margin-top: 20px;
+}
+
+.auditoria-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.auditoria-table th,
+.auditoria-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.auditoria-table th {
+    background-color: #2980b9;
+    color: white;
+}
+
+.auditoria-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.auditoria-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button to open details */
+.btn-abrir {
+    background-color: #e67e22;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-abrir:hover {
+    background-color: #d35400;
+}
