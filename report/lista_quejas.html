@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Quejas</title>
+    <link rel="stylesheet" href="lista.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Muni - Reclamos</h1>
+            <nav>
+                <a href="mapa_reclamos.php">Vista Reclamos Mapa</a>
+                <a href="lista.html" class="active">Vista Reclamos Lista</a>
+                <a href="index.php">Inicio</a>
+            </nav>
+        </header>
+
+        <div class="search-container">
+            <label for="search">Buscar:</label>
+            <input type="text" id="search" placeholder="Buscar por id_vecino, tipo, estado...">
+        </div>
+
+        <table class="complaints-table">
+            <thead>
+                <tr>
+                    <th>ID Vecino</th>
+                    <th>Tipo</th>
+                    <th>Mensaje</th>
+                    <th>Imagen</th>
+                    <th>Fecha</th>
+                    <th>Distrito</th>
+                    <th>Estado</th>
+                    <th>Respuesta</th>
+                </tr>
+            </thead>
+            <tbody id="complaints-tbody">
+                <!-- Aquí se cargará el contenido dinámicamente a través de PHP -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="lista.js"></script> <!-- Archivo de scripts JavaScript -->
+</body>
+</html>

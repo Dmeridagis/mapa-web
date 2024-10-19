@@ -1,0 +1,139 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configuración general */
+body {
+    font-family: 'Roboto', sans-serif; /* Fuente más moderna */
+    background-color: #eaf2f8; /* Fondo celeste claro */
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más suave y destacada */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 26px;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Efecto de transición */
+}
+
+nav a.active {
+    color: #501395; /* Color azul más claro */
+}
+
+nav a:hover {
+    color: #13957b; /* Cambiar a verde-azulado al pasar el mouse */
+}
+
+/* Contenedor de búsqueda */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #2c3e50;
+}
+
+.search-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Bordes más redondeados */
+    width: 320px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: box-shadow 0.3s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.4); /* Efecto de foco */
+}
+
+/* Tabla de reclamos */
+.complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.complaints-table th,
+.complaints-table td {
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.complaints-table th {
+    background-color: #3498db; /* Color azul */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.complaints-table td {
+    background-color: #f9f9f9;
+}
+
+.complaints-table tr:nth-child(even) {
+    background-color: #f1faff; /* Alternar filas con fondo celeste claro */
+}
+
+.complaints-table tr:hover {
+    background-color: #d6eaf8; /* Efecto hover en las filas */
+}
+
+/* Imagen de la queja */
+.complaint-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera en la imagen */
+}
+
+/* Estilos para dispositivos pequeños */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+
+    .complaints-table th, .complaints-table td {
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+}
