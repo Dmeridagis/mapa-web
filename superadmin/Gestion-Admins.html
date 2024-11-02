@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superadmin - Gestión de Administradores</title>
     <link rel="stylesheet" href="superadmin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -14,7 +15,6 @@
             <h1>Superadmin - Gestión de Administradores</h1>
             <nav>
                 <a href="Auditoria.html">Módulo de Auditoría</a>
-                <a href="#">Gestión de Administradores</a>
                 <a href="crear_admin.html">Crear Admin</a>
                 <a href="#">Inicio</a>
             </nav>
@@ -24,6 +24,7 @@
         <div class="search-container">
             <label for="search">Buscar administrador:</label>
             <input type="text" id="search" placeholder="Buscar por nombre, email, tipo...">
+            <button id="search-button">Buscar</button>
         </div>
 
         <!-- Tabla de administradores -->
@@ -32,20 +33,32 @@
                 <thead>
                     <tr>
                         <th>ID Usuario</th>
-                        <th>Tipo</th>
-                        <th>Área</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
                         <th>Usuario</th>
                         <th>Contraseña</th>
+                        <th>Estado</th>
                         <th>Administrar</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Aquí se conectarán los datos con la base de datos -->
+                <tbody id="admin-table-body">
+                    <!-- Los resultados se cargarán aquí con AJAX -->
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <script>
+        // Búsqueda de administradores
+        $('#search-button').click(function() {
+            const searchQuery = $('#search').val();
+
+            $.post('buscar_admin.php', { search: searchQuery }, function(data) {
+                $('#admin-table-body').html(data);
+            });
+        });
+    </script>
+
+</body>
+</html>
 
     </div>
 
