@@ -1,0 +1,301 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    background-color: rgb(152, 215, 240);
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    height: 50px;
+    align-items: center;
+    padding: 20px;
+}
+#logo{
+    font-family: Roboto;
+    font-size: x-large;
+}
+nav ul li{
+    display: inline-block;
+    margin: 0 18px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: rgb(34, 174, 216);
+    font-size: 17px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 7px 13px;
+}
+nav a:hover{
+    color: blue;
+}
+.checkbtn{
+    font-size: 30px;
+    color: rgb(34, 174, 216);
+    float: right;
+    line-height: 50px;
+    margin-right: 30px;
+    cursor: pointer;
+    display: none;
+}
+#check{
+    display: none;
+}
+@media (max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width:100%;
+        height: 100vh;
+        background-color: rgb(42, 42, 250);
+        top: 85px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 50px;
+    }
+    nav ul li a{
+        font-size: 18px;
+    }
+    #check:checked ~ ul {
+        left: 0;
+    }
+}
+.userinfo{
+    background-color: white;
+    margin-top: 5%;
+    height: 55vh;
+    width:30% ;
+    margin-left: 5% ;
+    border-radius: 7%;
+    text-align: center;
+}
+.userinfo h2{
+    padding-top: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: larger;
+}
+.userinfo p{
+    font-size: 17px;
+    padding-top: 35px;
+}
+#cerrarbtn {
+    margin-top: 35px;
+    background-color: whitesmoke;
+    border-color: skyblue;
+    padding: 15px 32px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.contenedor{
+    display: flex;
+}
+.listrecla{
+   background-color: white;
+   height: 60vh;
+   width:45% ;
+   margin-top: 5%;
+   margin-left: 10%;
+   border-radius: 7%;
+   text-align: center;
+}
+.listrecla h2{
+    padding-top: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: larger;
+}
+.tiprecla1{
+    margin-top: 30px;
+    padding: 9px 20px;
+    margin-left: 25px;
+    background-color: rgb(161, 157, 157);
+    border-radius: 20px;
+}
+.tiprecla2{
+    margin-top: 30px;
+    padding: 9px 20px;
+    margin-left: 25px;
+    background-color: rgb(236, 236, 78);
+    border-radius: 20px;
+}
+.tiprecla3{
+    margin-top: 30px;
+    padding: 9px 20px;
+    margin-left: 25px;
+    background-color: rgb(97, 226, 97);
+    border-radius: 20px;
+}
+.reclamos{
+    margin-top: 1%;
+    width:100% ;
+    padding-top: 0%;
+    border-collapse: collapse;
+}
+
+.reclamos img {
+    width: 20px; /* Ajusta el tamaño según lo que necesites */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+th {
+    background-color: skyblue;/* Color de fondo de los encabezados */
+    padding: 12px;
+    text-align: center; /* Alineación del texto en el encabezado */
+    font-weight: bold; /* Texto en negrita */
+    border-bottom: 2px solid #ddd; /* Borde inferior */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+td {
+    padding: 10px; /* Espaciado interno de las celdas */
+    border-bottom: 1px solid #ddd; /* Borde inferior */
+    text-align: center; /* Alineación del texto */
+    border-right: 1px solid skyblue ;
+}
+@media (max-width: 858px){
+    .contenedor{
+        flex-direction: column;
+    }
+    .userinfo{
+        width: 60%;
+        margin-left: 20%;
+    }
+    .listrecla{
+        width: 80%;
+    }
+    .tiprecla1{
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+    .tiprecla2{
+        margin-top: 20px;
+        margin-left: 15px;
+    }
+    .tiprecla3{
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+}
+.clickable{
+    cursor: pointer;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 28%;
+    top: 25%;
+    width: 40%;
+    height: 55%;
+    background: transparent;
+    border: 2px solid;
+    border-radius: 20px;
+    background: rgba(67, 142, 228, 0.5);
+}
+.modal-content {
+    margin: 2% auto;
+    padding: 20px;
+    width: 90%;
+    height: 79.5%;
+    display: flex;
+    position: relative;
+}
+.close {
+    float: right;
+    color: #070707;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: auto;
+    position: absolute;
+    margin-left: 92%;
+    top: -5px;
+}
+
+.close:hover, .close:focus {
+    color: rgb(88, 86, 86);
+    cursor: pointer;
+}
+.scroll-table{
+    height: 215px;
+    width: 615px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.stop{
+    height: 80px;
+}
+.modal-content p {
+    margin: 5px 0;
+    color: #070707;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Imagen dentro del modal */
+.imgmodal{
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}
+.modal-content img {
+    object-fit: contain; 
+    width: 100%;
+    max-width: 150px; /* Ajusta el tamaño máximo de la imagen */
+    height: auto;
+    max-height: 520px; /* Ajusta el tamaño máximo en altura */
+    object-fit: contain; /* Ajusta la imagen sin recortarla */
+}
