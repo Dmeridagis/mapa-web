@@ -157,16 +157,17 @@ function getRandomColor() {
 // Diccionario para guardar colores de los barrios
 var barrioColors = {};
 
+
 // Definir la capa de manzanas
 var manzanas = L.geoJson(null, {
   style: function (feature) {
     // Asignar un color aleatorio si aún no se ha asignado
-    if (!barrioColors[feature.properties.id_mzna]) {
-      barrioColors[feature.properties.id_mzna] = getRandomColor();
+    if (!barrioColors[feature.properties.id_sector]) {
+      barrioColors[feature.properties.id_sector] = getRandomColor();
     }
     return {
-      color: barrioColors[feature.properties.id_mzna],
-      fillColor: barrioColors[feature.properties.id_mzna],
+      color: barrioColors[feature.properties.id_sector],
+      fillColor: barrioColors[feature.properties.id_sector],
       fill: true,
       fillOpacity: 0.5,
       weight: 2,
@@ -175,23 +176,22 @@ var manzanas = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
     buscarManzana.push({
-      name: layer.feature.properties.cod_mzna,
+      name: layer.feature.properties.id_sector,
       source: "Manzanas",
       id: L.stamp(layer),
       bounds: layer.getBounds()
     });
-
   
 
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" onclick="document.getElementById(\'nuevoModal\').style.display=\'block\'; setTimeout(mapi.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevoModal">C</button>&ensp;' +
-      '<a href="report/editamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-default" >U</a>&ensp;' +
-      '<a href="report/eliminamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">D</a>' +
+      '<button type="button" onclick="document.getElementById(\'nuevoModal\').style.display=\'block\'; setTimeout(mapi.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevoModal">Agregar</button>&ensp;' +
+      '<a href="report/editamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-default" >Editar</a>&ensp;' +
+      '<a href="report/eliminamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">Eliminar</a>' +
       "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>id_sector: " + feature.properties.id_sector +
       "</td></tr><tr><td>Manzana: " + feature.properties.cod_mzna +
       "</td></tr></table>",
-      { minWidth: 150, maxWidth: 200 }
+      { minWidth: 250, maxWidth: 300 }
     );
   }
 });
@@ -240,11 +240,11 @@ var calles = L.geoJson(null, {
   style: function (feature) {
     switch (feature.properties.tipo) {
       case 'Calle':
-        return { color: 'gray', weight: 1, opacity: 0.5 };
+        return { color: 'gray', weight: 3, opacity: 0.3 };
       case 'RP':
-        return { color: '#E388FC', weight: 3, opacity: 0.5 };
+        return { color: '#E388FC', weight: 5, opacity: 0.3 };
         case 'RN': 
-        return { color: '#FC9A88', weight: 5, opacity: 0.5};
+        return { color: '#FC9A88', weight: 6, opacity: 0.3};
       default:
         return { color: 'gray', weight: 1, opacity: 1 };
     }
@@ -252,7 +252,7 @@ var calles = L.geoJson(null, {
 
   onEachFeature: function (feature, layer) {
     buscarVia.push({
-      name: layer.feature.properties.via,
+      name: layer.feature.properties.nombre,
       source: "Vias",
       id: L.stamp(layer),
       bounds: layer.getBounds()
@@ -260,13 +260,13 @@ var calles = L.geoJson(null, {
 
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" name="botonvia" id="botonvia" onclick="document.getElementById(\'nuevaviaModal\').style.display=\'block\'; setTimeout(mapVia.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevaviaModal">C</button>&ensp;' +
-      '<a href="report/editavia.php?codigo=' + feature.properties.id + '" class="btn btn-default" >U</a>&ensp;' +
-      '<a href="report/eliminavia.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">D</a>' +
-      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Codigo: " + feature.properties.id +
-      "</td></tr><tr><td>Via: " + feature.properties.via +
+      '<button type="button" name="botonvia" id="botonvia" onclick="document.getElementById(\'nuevaviaModal\').style.display=\'block\'; setTimeout(mapVia.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevaviaModal">Insertar</button>&ensp;' +
+      '<a href="report/editavia.php?codigo=' + feature.properties.id + '" class="btn btn-default" >Editar</a>&ensp;' +
+      '<a href="report/eliminavia.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">Eliminar</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Tipo: " + feature.properties.tipo +
+      "</td></tr><tr><td>Nombre: " + feature.properties.nombre +
       "</td></tr></table>",
-      { minWidth: 150, maxWidth: 200 }
+      { minWidth: 250, maxWidth: 300 }
     );
   }
 });
@@ -293,18 +293,18 @@ var sitios = L.geoJson(null, {
   },
   onEachFeature: function (feature, layer) {
    buscarSitio.push({
-      name: layer.feature.properties.descripcion,
+      name: layer.feature.properties.nombre,
       source: "Sitios",
       id: L.stamp(layer)
     })
 	layer.bindPopup("<div style=text-align:center><h3>"+
-	'<button type="button" onclick="document.getElementById('+"'nuevositioModal'"+').style.display='+"'block'"+'; setTimeout(mapSitio.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevositioModal">C</button>&ensp;'+
-	'<a href="report/editaSitio.php?codigo='+ feature.properties.id +'" class="btn btn-default" >U</a>&ensp;'+
-	'<a href="report/eliminaSitio.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">D</a>'+
-	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Codigo: "+feature.properties.id+
-	"</td></tr><tr><td>Descripcion: "+feature.properties.descripcion+
+	'<button type="button" onclick="document.getElementById('+"'nuevositioModal'"+').style.display='+"'block'"+'; setTimeout(mapSitio.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevositioModal">Agregar</button>&ensp;'+
+	'<a href="report/editaSitio.php?codigo='+ feature.properties.id +'" class="btn btn-default" >Editar</a>&ensp;'+
+	'<a href="report/eliminaSitio.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">Eliminar</a>'+
+	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Tipo: "+feature.properties.tipo+
+	"</td></tr><tr><td>Nombre: "+feature.properties.nombre+
 	"</td></tr></table>",
-	{minWidth: 150, maxWidth: 200});
+	{minWidth: 250, maxWidth: 300});
   }
 });
 $.getJSON("report/sitios.php", function (data) {
@@ -341,9 +341,9 @@ var saludLayer = L.geoJson(null, {
   
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" onclick="document.getElementById(\'nuevosaludModal\').style.display=\'block\'; setTimeout(mapSalud.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevosaludModal">C</button> ' +
-      '<a href="report/editasalud.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
-      '<a href="report/eliminasalud.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      '<button type="button" onclick="document.getElementById(\'nuevosaludModal\').style.display=\'block\'; setTimeout(mapSalud.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevosaludModal">Agregar</button> ' +
+      '<a href="report/editasalud.php?codigo=' + feature.properties.id + '" class="btn btn-default">Editar</a> ' +
+      '<a href="report/eliminasalud.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">Eliminar</a>' +
       "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
       "<table>" +
       "<tr><td>Código: " + feature.properties.id + "</td></tr>" +
@@ -351,7 +351,7 @@ var saludLayer = L.geoJson(null, {
       "<tr><td>Domicilio: " + feature.properties.domicilio + "</td></tr>" +
       "<tr><td>Teléfono: " + feature.properties.telefono + "</td></tr>" +
       "</table>",
-      { minWidth: 150, maxWidth: 200 }
+      { minWidth: 250, maxWidth: 300 }
     );
   }
 
@@ -389,9 +389,9 @@ var seguridadLayer = L.geoJson(null, {
 
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" onclick="document.getElementById(\'nuevopolicialModal\').style.display=\'block\'; setTimeout(mapSeguridad.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevopolicialModal">C</button> ' +
-      '<a href="report/editapolicial.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
-      '<a href="report/eliminarpolicial.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      '<button type="button" onclick="document.getElementById(\'nuevopolicialModal\').style.display=\'block\'; setTimeout(mapSeguridad.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevopolicialModal">Agregar</button> ' +
+      '<a href="report/editapolicial.php?codigo=' + feature.properties.id + '" class="btn btn-default">Editar</a> ' +
+      '<a href="report/eliminarpolicial.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">Eliminar</a>' +
       "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
       "<table>" +
       "<tr><td>ID: " + feature.properties.id + "</td></tr>" +
@@ -403,7 +403,7 @@ var seguridadLayer = L.geoJson(null, {
       "<tr><td>Tipo: " + feature.properties.tipo + "</td></tr>" +
       "<tr><td>Nombre: " + feature.properties.nombre + "</td></tr>" +
       "</table>",
-      { minWidth: 150, maxWidth: 200 }
+      { minWidth: 250, maxWidth: 300 }
     );
   }
 });
@@ -498,9 +498,9 @@ var deportesLayer = L.geoJson(null, {
 
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" onclick="document.getElementById(\'nuevodeporteModal\').style.display=\'block\'; setTimeout(mapDeporte.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevodeporteModal">C</button> ' +
-      '<a href="report/editaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
-      '<a href="report/eliminaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      '<button type="button" onclick="document.getElementById(\'nuevodeporteModal\').style.display=\'block\'; setTimeout(mapDeporte.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevodeporteModal">Insertar</button> ' +
+      '<a href="report/editaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-default">Editar</a> ' +
+      '<a href="report/eliminaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">Eliminar</a>' +
       "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
       "<table>" +
       "<tr><td>ID: " + feature.properties.id + "</td></tr>" +
@@ -515,7 +515,7 @@ var deportesLayer = L.geoJson(null, {
       "<tr><td>Teléfono: " + feature.properties.telefono + "</td></tr>" +
       "<tr><td>ID Distrito: " + feature.properties.id_distrit + "</td></tr>" +
       "</table>",
-      { minWidth: 150, maxWidth: 200 }
+      { minWidth: 250, maxWidth: 300 }
     );
   }
 });
@@ -797,6 +797,7 @@ $(document).one("ajaxStop", function () {
     if ($(".navbar-collapse").height() > 50) {
       $(".navbar-collapse").collapse("hide");
     }
+    
   }).on("typeahead:opened", function () {
     $(".navbar-collapse.in").css("max-height", $(document).height() - $(".navbar-header").height());
     $(".navbar-collapse.in").css("height", $(document).height() - $(".navbar-header").height());
