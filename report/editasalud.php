@@ -1,6 +1,6 @@
 <?php
-include 'consultasalud.php';
-$sa= $salud;
+include 'consultasalud.php'; // Asegúrate de que esto incluya correctamente tu lógica de $salud
+$sa= $salud ?? []; 
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +22,16 @@ $sa= $salud;
     <link rel="stylesheet" href="../css/MarkerCluster.css">
     <link rel="stylesheet" href="../css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="../css/L.Control.Locate.css">
+	<style>
+        .form-container2 {
+            max-height: 550px; /* Ajusta esto según el tamaño de tu pantalla */
+            overflow-y: auto; /* Añade un desplazador vertical */
+            padding-right: 15px; /* Para que el scroll no tape contenido */
+        }
+		.btn {
+    margin-bottom: 15px; /* Agrega un poco de margen inferior */
+}
+    </style>
 
 	<link href="../css/leaflet.draw.css" rel="stylesheet" type="text/css"/>	
 	<link rel="stylesheet" href="../osm/Control.OSMGeocoder.css"/>
@@ -77,45 +87,30 @@ $sa= $salud;
         </div><!--/.navbar-collapse -->
       </div>
     </div>
+	<div id="container2">
+    <div class="row">
+        <div class="col-md-3 form-container2" style="padding-left: 30px;">
+        <form method="post" id="insert_form_salud">
+    <br /><label for="txtcodigo">Código</label><input type="text" name="txtcodigo" id="txtcodigo" class="form-control" readonly="" title="Código del centro de salud"/><br />
+    <label for="dto">Departamento</label><input type="text" name="dto" id="dto" class="form-control" placeholder="Departamento" title="Departamento del centro de salud"/><br />
+    <label for="n_ctro">Número de centro de salud</label><input type="text" name="n_ctro" id="n_ctro" class="form-control" placeholder="001" title="Número del centro de salud"/><br />
+    <label for="estratif">Zona</label><input type="text" name="estratif" id="estratif" class="form-control" placeholder="Rural" title="Zona del centro de salud"/><br />
+    <label for="nombre">Nombre</label><input type="text" name="nombre" id="nombre" class="form-control" placeholder="Santa Blanca" title="Nombre del centro de salud"/><br />
+    <label for="domicilio">Domicilio</label><input type="text" name="domicilio" id="domicilio" class="form-control" placeholder="SAN MARTIN 1452" title="Domicilio del centro de salud"/><br />
+    <label for="telefono">Teléfono</label><input type="text" name="telefono" id="telefono" class="form-control" placeholder="4565874" title="Teléfono del centro de salud"/><br />
+    <label for="txtgeosalud">Coordenadas</label><textarea name="geom" id="txtgeosalud" class="form-control" rows="10" readonly="" title="Coordenadas del centro de salud"></textarea><br />
+    <input type="submit" name="insertsalud" id="insertsalud" value="Actualizar" class="btn btn-success" title="Actualizar los datos del centro de salud"/>
+</form>
 
-    <div id="container">
-		<div class="row">
-			<div class="col-md-3" style="padding-left: 30px;">
-			 <form method="post" id="insert_form_salud">
-						<br />
-						<label> Codigo</label>
-						<input type="text" name="txtcodigo" id="txtcodigo" class="form-control"  readonly />
-						<br />
-						<label> Departamento</label>
-						<input type="text" name="txtdtosalud" id="txtdtosalud" class="form-control"  />
-						<br />
-						<label> Número de centro de salud</label>
-						<input type="text" name="txtnsalud" id="txtnsalud" class="form-control"  placeholder="001"/>
-						<br />
-						<label> zona</label>
-						<input type="text" name="txtestratif" id="txtestratif" class="form-control"  placeholder="rural"/>
-						<br />
-						<label> Nombre</label>
-						<input type="text" name="txtnombresalud" id="ttxtnombresalud" class="form-control"  placeholder="Santa Blanca"/>
-						<br />
-						<label> Domicilio</label>
-						<input type="text" name="txtdomiciliosalud" id="txtdomiciliosalud" class="form-control"  placeholder="SAN MARTIN 1452"/>
-						<br />
-						<label> Telefono</label>
-						<input type="text" name="txttelefonosalud" id="txttelefonosalud" class="form-control"  placeholder="4565874"/>
-						<br />
-						<label> Coordenadas</label>
-						<textarea name="txtgeosalud" id="txtgeosalud" class="form-control" rows="10" readonly ></textarea>
-						<br />
-						<input type="submit" name="insertsalud" id="insertsalud" value="Actualizar" class="btn btn-success" />
-					</form>
-			</div>
-			<div class="col-md-9">
-			  <div id="map" style="height: 600px"></div>
-			</div>
+
+
+        </div>
+        <div class="col-md-9">
+            <div id="map" style="height: 600px"></div>
 			
-       </div>
+        </div>
     </div>
+</div>
 
     <script src="../js/jquery-2.1.4.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -131,18 +126,13 @@ $sa= $salud;
 	
 <script>
 
-  var map = L.map('map').setView([-6.781166,-79.874960], 17);
-
+  var map = L.map('map').setView([-33.007593020, -68.6544329100], 17);
+ 
   var osm = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 			maxZoom: 21
         }).addTo(map);
 
-	var imagenUrl = '../images/imagen2.jpg';
-    var limiteImagen = [[-6.783495,-79.878558], [-6.779442,-79.871314]];
 	
-	var raster = L.imageOverlay(imagenUrl, limiteImagen, {
-		//opacity:0.8,
-		attribution:'Habilitacion Urbana El Trebol'}).addTo(map);
 		
 	//adicionar busqueda
     var osmGeocoder = new L.Control.OSMGeocoder({
@@ -163,8 +153,8 @@ $sa= $salud;
 		map.fitBounds(geojson.getBounds());
 	
 	        //adding drawing elements
-        var geojsonnuevositio = new L.FeatureGroup();
-        map.addLayer(geojsonnuevositio);
+        var geojsonnuevosalud= new L.FeatureGroup();
+        map.addLayer(geojsonnuevosalud);
 
 	
 	 //configuring what shapes users can draw
@@ -189,7 +179,7 @@ $sa= $salud;
 map.on('draw:created', function (e) {
 	var type = e.layerType,
 	layer = e.layer;
-	geojsonnuevositio.addLayer(layer);
+	geojsonnuevosalud.addLayer(layer);
 	$('#txtgeosalud').val(JSON.stringify(layer.toGeoJSON().geometry.coordinates));
 	});
 	
@@ -208,16 +198,16 @@ map.on('draw:deleted', function () {
 	
 
  
- if (jsonPHP){
-	 $('#txtcodigo').val(jsonPHP['features'][0]['properties']['id']);
-	 $('#txtdtosalud').val(jsonPHP['features'][0]['properties']['n_ctro']);
-	 $('#txtnombresalud').val(jsonPHP['features'][0]['properties']['nombre']);
-	 $('#txtdomiciliosalud').val(jsonPHP['features'][0]['properties']['domicilio']);
-	 $('#txttelefonosalud').val(jsonPHP['features'][0]['properties']['telefono']);
-	 $('#txtestratific').val(jsonPHP['features'][0]['properties']['estratific']);
-	 $('#txtgeosalud').val(JSON.stringify(jsonPHP['features'][0]['geometry']));
- }
- 
+	if (jsonPHP) {
+      $('#txtcodigo').val(jsonPHP['features'][0]['properties']['id']);
+      $('#dto').val(jsonPHP['features'][0]['properties']['dto']);
+      $('#n_ctro').val(jsonPHP['features'][0]['properties']['n_ctro']);
+      $('#estratif').val(jsonPHP['features'][0]['properties']['estratif']);
+      $('#nombre').val(jsonPHP['features'][0]['properties']['nombre']);
+      $('#domicilio').val(jsonPHP['features'][0]['properties']['domicilio']);
+      $('#telefono').val(jsonPHP['features'][0]['properties']['telefono']);
+      $('#txtgeosalud').val(JSON.stringify(jsonPHP['features'][0]['geometry']));
+  }
 $(document).ready(function(){  
       $('#insert_form_salud').on("submit", function(event){
 		event.preventDefault();
@@ -236,7 +226,7 @@ $(document).ready(function(){
 		else
 		{
 			$.ajax({
-				url:"insertasalud.php",
+				url:"insertarsalud.php",
 				method:"POST",
 				data:$('#insert_form_salud').serialize(),
 				beforeSend:function(){
@@ -253,5 +243,6 @@ $(document).ready(function(){
  }); 
  
 	</script>
+
 </body>
 </html>

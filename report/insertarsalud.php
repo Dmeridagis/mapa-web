@@ -1,42 +1,44 @@
 <?php
+$codigo = isset($_POST['txtcodigo']) ? $_POST['txtcodigo'] : '';
+$dto = isset($_POST['dto']) ? $_POST['dto'] : '';
+$n_ctro = isset($_POST['n_ctro']) ? $_POST['n_ctro'] : '';
+$estratif = isset($_POST['estratif']) ? $_POST['estratif'] : '';
+$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+$domicilio = isset($_POST['domicilio']) ? $_POST['domicilio'] : '';
+$telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+$geom = isset($_POST['geom']) ? $_POST['geom'] : '';
+$punto = 'POINT(' . str_replace(array('[', ']', ','), array('', '', ' '), $geom) . ')';
 
-$codigo=$_POST['txtcodigo'];
-$b=$_POST['txtdtosalud'];
-$c=$_POST['txtnsalud'];
-$d=$_POST['txtnombresalud'];
-$e=$_POST['txtdomiciliosalud'];
-$g=$_POST['txttelefonosalud'];
-$j=$_POST ['txtestratif'];
-$h=$_POST['txtgeosalud'];
-$cadenauno = str_replace(",", " ",$h);
-$cadenados = str_replace("] [", ", ",$cadenauno);
-$coordenadas = str_replace( "[", "",str_replace("]", "",$cadenados));
-$punto='POINT('.$coordenadas.')';
-/*
-echo $a."<br>";
-echo $b."<br>";
-echo $c."<br>";
-echo $d."<br>";
-echo $punto."<br>";
-die();
-*/
 include 'libreria.php';
-switch($codigo){
-    case '':
-        $sql="insert into public.centros_de_salud(dto, n_ctro, nombre, domicilio, telefono, estratif, geom) 
-        values('$b','$c','$d','$e','$g','$h',ST_GeomFromText('$punto', 4326))";
-        break;
-    case 0:
-        $sql="insert into public.centros_de_salud(dto, n_ctro, nombre, domicilio, telefono, geom) 
-        values('$b','$c','$d','$e','$g','$h',ST_GeomFromText('$punto', 4326))";  
-        break;
-    case $codigo>0:
-        $sql="update public.centros_de_salud set dto='$b', n_ctro='$c',nombre='$d', domicilio='$e',telefono='$g', estratif='$h', geom=ST_GeomFromText('$punto', 4326)
-        where id=$codigo";        
-        break;
 
+// Mensajes de depuración para verificar que se reciben los datos
+echo "Datos recibidos:<br>";
+echo "Código: $codigo<br>";
+echo "DTO: $dto<br>";
+echo "N° Centro: $n_ctro<br>";
+echo "Estratificación: $estratif<br>";
+echo "Nombre: $nombre<br>";
+echo "Domicilio: $domicilio<br>";
+echo "Teléfono: $telefono<br>";
+echo "Geom: $geom<br>";
+echo "Punto: $punto<br>";
+// die(); // Puedes comentar esto una vez que hayas verificado los datos
+
+if ($codigo === '' || $codigo == 0) {
+    $sql = "INSERT INTO public.centros_de_salud (dto, n_ctro, estratif, nombre, domicilio, telefono, geom)
+            VALUES ('$dto', '$n_ctro', '$estratif', '$nombre', '$domicilio', '$telefono', ST_GeomFromText('$punto', 4326))";
+} else {
+    $sql = "UPDATE public.centros_de_salud
+            SET dto='$dto', n_ctro='$n_ctro', estratif='$estratif', nombre='$nombre', domicilio='$domicilio', telefono='$telefono', geom=ST_GeomFromText('$punto', 4326)
+            WHERE id=$codigo";
 }
 
-$w=ejecutar($sql);
+echo "Consulta SQL: " . $sql; // Mostrar la consulta SQL para depuración
+$w = ejecutar($sql);
 
+if ($w) {
+    echo "Registro actualizado exitosamente";
+} else {
+    echo "Error al actualizar el registro: " . pg_last_error($cnx);
+}
 ?>

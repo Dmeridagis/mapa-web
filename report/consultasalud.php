@@ -1,12 +1,14 @@
 <?php
-
 include 'libreria.php';
 
-$codigo=$_GET["codigo"];
 
-$sql="select id, dto, n_ctro, estratif, nombre, domicilio, telefono, ST_AsGeoJSON(ST_Transform(geom,4326)) as geom from public.centros_de_salud where id=$codigo";
+    $codigo = $_GET['codigo'];
 
-$salud=consultaGeojson2($sql);                          
+    $sql = "SELECT id, dto, n_ctro, estratif, nombre, domicilio, telefono, ST_AsGeoJSON(geom) as geom 
+            FROM public.centros_de_salud 
+            WHERE id=$codigo";
+            $salud=consultaGeojson2($sql);
 
 
-?>
+            
+ ?>
