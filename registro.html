@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>cuenta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="Shortcut Icon" type="image/x-icon" href="assets/icons/book.ico" /> <!--ESTO ES EL LOGO DE LA PESTAÑA-->
+    <link rel="stylesheet" href="css/material-design-iconic-font.min.css"> <!--ICONOS DEL DIV DE LOGIN-->
+    <link rel="stylesheet" href="css/normalize.css"> <!--ES PARA QUE LOS ELEMENTOS "FUNCIONEN" EN CUALQUIER NAVEGADOR-->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!--MODIFICA EL LOGIN ESTETICAMENTE-->
+    <link rel="stylesheet" href="css/style.css"> <!--ESTILO DE LA PAGINA-->
+    <link rel="stylesheet" href="css/login.css"/> <!--ESTILO DEL FORMULARIO-->
+    <script src="js/modernizr.js"></script> <!--QUE SEA COMPATIBLE CON CUALQUIER NAVEGADOR-->
+</head>
+<body class="full-cover-background" style="background-image:url(assets/img/wallpaper_login.jpg);"> <!--El Fondo-->
+    <div class="form-container"> <!--CONTIENE EL FORMULARIO-->
+      <p class="text-center" style="margin-top: 17px;">
+        <i class="zmdi zmdi-account-circle zmdi-hc-5x"></i>
+    </p>
+       <h4 class="text-center all-tittles" style="margin-bottom: 30px;">inicia sesión con tu cuenta</h4>
+       <form method ="post" action ="report/validareg.php" >
+
+            <!--ESTE ES EL CORREO-->
+            <div class="group-material-login"> 
+                <input type="email" class="material-login-control" required="" maxlength="50" name="txtemail">
+                <span class="highlight-login"></span>
+                <span class="bar-login"></span>
+                <label><i class="zmdi zmdi-email"></i> &nbsp; E-mail</label>
+            </div>
+            
+            <!--ESTE ES EL USUARIO-->
+            <div class="group-material-login">
+              <input type="text" class="material-login-control" required="" maxlength="20" name="txtusuario">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-account"></i> &nbsp; Nombres</label>
+            </div>
+            <!--ESTA ES LA CONTRASEÑA-->
+            <div class="group-material-login"> 
+              <input type="password" class="material-login-control" required="" maxlength="20" name="txtclave">
+              <span class="highlight-login"></span>
+              <span class="bar-login"></span>
+              <label><i class="zmdi zmdi-lock"></i> &nbsp; Contraseña</label>
+            </div>
+            
+            <p>¿Ya tienes una cuenta? <a href="login.html">Iniciar sesión</a></p>
+           
+            <button class="btn-login" type="submit">Ingresar al sistema &nbsp; <i class="zmdi zmdi-arrow-right"></i></button>
+        </form>
+    </div>  
+    <div>
+      
+    </div>
+</body>
+</html>
