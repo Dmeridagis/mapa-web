@@ -59,6 +59,21 @@ $("#botonpuntointeres").click(function() {
   return false;
 });
 
+$("#botonsalud").click(function() {
+  $("#nuevosaludModal").modal("show");
+   $(".navbar-collapse.in").collapse("hide");
+  return false;
+});
+
+$("#botonpolicial").click(function() {
+  $("#nuevopolicialModal").modal("show");
+  $(".navbar-collapse.in").collapse("hide");
+  return false;
+});
+
+
+
+
 function sizeLayerControl() {
   $(".leaflet-control-layers").css("max-height", $("#map").height() - 50);
 }
@@ -96,64 +111,170 @@ var highlightStyle = {
   radius: 10
 };
 
+// var manzanas = L.geoJson(null, {
+//   style: function (feature) {
+//     return {
+//       color: "red",
+//       fill: true,
+//       opacity: 0.4,
+//       clickable: true
+//     };
+//   },
+//   onEachFeature: function (feature, layer) {
+// 	buscarManzana.push({
+//       name: layer.feature.properties.cod_mzna,
+//       source: "Manzanas",
+//       id: L.stamp(layer),
+//       bounds: layer.getBounds()
+//     })
+// 	layer.bindPopup("<div style=text-align:center><h3>"+
+// 	'<button type="button" onclick="document.getElementById('+"'nuevoModal'"+').style.display='+"'block'"+'; setTimeout(mapi.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevoModal">C</button>&ensp;'+
+// 	'<a href="report/editamanzana.php?codigo='+ feature.properties.id +'" class="btn btn-default" >U</a>&ensp;'+
+// 	'<a href="report/eliminamanzana.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">D</a>'+
+// 	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>id_sector: "+feature.properties.id_sector+
+// 	"</td></tr><tr><td>Manzana: "+feature.properties.cod_mzna+
+// 	"</td></tr></table>",
+// 	{minWidth: 150, maxWidth: 200});
+//   }	
+// });
+// $.getJSON("report/manzana.php", function (data) {
+//   manzanas.addData(data);
+// });
+
+
+
+
+// Función para generar colores aleatorios
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Diccionario para guardar colores de los barrios
+var barrioColors = {};
+
+// Definir la capa de manzanas
 var manzanas = L.geoJson(null, {
   style: function (feature) {
+    // Asignar un color aleatorio si aún no se ha asignado
+    if (!barrioColors[feature.properties.id_mzna]) {
+      barrioColors[feature.properties.id_mzna] = getRandomColor();
+    }
     return {
-      color: "red",
+      color: barrioColors[feature.properties.id_mzna],
+      fillColor: barrioColors[feature.properties.id_mzna],
       fill: true,
-      opacity: 0.4,
-      clickable: true
+      fillOpacity: 0.5,
+      weight: 2,
+      opacity: 1
     };
   },
   onEachFeature: function (feature, layer) {
-	buscarManzana.push({
+    buscarManzana.push({
       name: layer.feature.properties.cod_mzna,
       source: "Manzanas",
       id: L.stamp(layer),
       bounds: layer.getBounds()
-    })
-	layer.bindPopup("<div style=text-align:center><h3>"+
-	'<button type="button" onclick="document.getElementById('+"'nuevoModal'"+').style.display='+"'block'"+'; setTimeout(mapi.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevoModal">C</button>&ensp;'+
-	'<a href="report/editamanzana.php?codigo='+ feature.properties.id +'" class="btn btn-default" >U</a>&ensp;'+
-	'<a href="report/eliminamanzana.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">D</a>'+
-	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>id_sector: "+feature.properties.id_sector+
-	"</td></tr><tr><td>Manzana: "+feature.properties.cod_mzna+
-	"</td></tr></table>",
-	{minWidth: 150, maxWidth: 200});
-  }	
-});
-$.getJSON("report/manzana.php", function (data) {
-  manzanas.addData(data);
+    });
+
+  
+
+    layer.bindPopup(
+      "<div style='text-align:center'><h3>" +
+      '<button type="button" onclick="document.getElementById(\'nuevoModal\').style.display=\'block\'; setTimeout(mapi.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevoModal">C</button>&ensp;' +
+      '<a href="report/editamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-default" >U</a>&ensp;' +
+      '<a href="report/eliminamanzana.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">D</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>id_sector: " + feature.properties.id_sector +
+      "</td></tr><tr><td>Manzana: " + feature.properties.cod_mzna +
+      "</td></tr></table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
+  }
 });
 
+$.getJSON("report/manzana.php", function (data) {
+  manzanas.addData(data);
+  map.addLayer(manzanas);
+});
+
+
+
+
+// var calles = L.geoJson(null, {
+//   style: function (feature) {
+//       return {
+//         color: 'blue',
+//         weight: 3,
+//         opacity: 1
+//       };
+//   },
+//   onEachFeature: function (feature, layer) {
+// 	buscarVia.push({
+//       name: layer.feature.properties.via,
+//       source: "Vias",
+//       id: L.stamp(layer),
+//       bounds: layer.getBounds()
+//     })
+// 	layer.bindPopup("<div style=text-align:center><h3>"+
+// 	'<button type="button" name="botonvia" id="botonvia" onclick="document.getElementById('+"'nuevaviaModal'"+').style.display='+"'block'"+'; setTimeout(mapVia.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevaviaModal">C</button>&ensp;'+
+// 	'<a href="report/editavia.php?codigo='+ feature.properties.id +'" class="btn btn-default" >U</a>&ensp;'+
+// 	'<a href="report/eliminavia.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">D</a>'+
+// 	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Codigo: "+feature.properties.id+
+// 	"</td></tr><tr><td>Via: "+feature.properties.via+
+// 	"</td></tr></table>",
+// 	{minWidth: 150, maxWidth: 200});
+//   }
+// });
+// $.getJSON("report/vias.php", function (data) {
+//   calles.addData(data);
+// });
+
+
+
+// Definir la capa de calles
 var calles = L.geoJson(null, {
   style: function (feature) {
-      return {
-        color: 'blue',
-        weight: 3,
-        opacity: 1
-      };
+    switch (feature.properties.tipo) {
+      case 'Calle':
+        return { color: 'gray', weight: 1, opacity: 0.5 };
+      case 'RP':
+        return { color: '#E388FC', weight: 3, opacity: 0.5 };
+        case 'RN': 
+        return { color: '#FC9A88', weight: 5, opacity: 0.5};
+      default:
+        return { color: 'gray', weight: 1, opacity: 1 };
+    }
   },
+
   onEachFeature: function (feature, layer) {
-	buscarVia.push({
+    buscarVia.push({
       name: layer.feature.properties.via,
       source: "Vias",
       id: L.stamp(layer),
       bounds: layer.getBounds()
-    })
-	layer.bindPopup("<div style=text-align:center><h3>"+
-	'<button type="button" name="botonvia" id="botonvia" onclick="document.getElementById('+"'nuevaviaModal'"+').style.display='+"'block'"+'; setTimeout(mapVia.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevaviaModal">C</button>&ensp;'+
-	'<a href="report/editavia.php?codigo='+ feature.properties.id +'" class="btn btn-default" >U</a>&ensp;'+
-	'<a href="report/eliminavia.php?codigo='+ feature.properties.id +'" class="btn btn-danger" onclick="return confirm('+"'seguro?'"+')">D</a>'+
-	"</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Codigo: "+feature.properties.id+
-	"</td></tr><tr><td>Via: "+feature.properties.via+
-	"</td></tr></table>",
-	{minWidth: 150, maxWidth: 200});
+    });
+
+    layer.bindPopup(
+      "<div style='text-align:center'><h3>" +
+      '<button type="button" name="botonvia" id="botonvia" onclick="document.getElementById(\'nuevaviaModal\').style.display=\'block\'; setTimeout(mapVia.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevaviaModal">C</button>&ensp;' +
+      '<a href="report/editavia.php?codigo=' + feature.properties.id + '" class="btn btn-default" >U</a>&ensp;' +
+      '<a href="report/eliminavia.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'seguro?\')">D</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div><table><tr><td>Codigo: " + feature.properties.id +
+      "</td></tr><tr><td>Via: " + feature.properties.via +
+      "</td></tr></table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
   }
 });
+
 $.getJSON("report/vias.php", function (data) {
   calles.addData(data);
 });
+
 
 /* Empty layer placeholder to add to layer control for listening when to add/remove sitios to markerClusters layer */
 var sitiosLayer = L.geoJson(null);
@@ -200,7 +321,7 @@ var saludLayer = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
       icon: L.icon({
-        iconUrl: "assets/img/add.png",
+        iconUrl: "assets/img/salud.png",
         iconSize: [24, 28],
         iconAnchor: [12, 28],
         popupAnchor: [0, -25]
@@ -220,9 +341,9 @@ var saludLayer = L.geoJson(null, {
   
     layer.bindPopup(
       "<div style='text-align:center'><h3>" +
-      '<button type="button" onclick="document.getElementById(\'nuevositioModal\').style.display=\'block\'; setTimeout(mapSitio.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevositioModal">C</button> ' +
-      '<a href="report/editaSitio.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
-      '<a href="report/eliminaSitio.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      '<button type="button" onclick="document.getElementById(\'nuevosaludModal\').style.display=\'block\'; setTimeout(mapSalud.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevosaludModal">C</button> ' +
+      '<a href="report/editasalud.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
+      '<a href="report/eliminasalud.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
       "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
       "<table>" +
       "<tr><td>Código: " + feature.properties.id + "</td></tr>" +
@@ -233,12 +354,8 @@ var saludLayer = L.geoJson(null, {
       { minWidth: 150, maxWidth: 200 }
     );
   }
-  
 
 });
-
-
-
 $.getJSON("report/salud.php", function (data) {
   saludLayer.addData(data);
   map.addLayer(saludLayer);
@@ -246,6 +363,167 @@ $.getJSON("report/salud.php", function (data) {
 
 
 
+
+// Seguridad
+
+var seguridadLayer = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: "assets/img/policia.png", // Asegúrate de tener un ícono adecuado para seguridad
+        iconSize: [24, 28],
+        iconAnchor: [12, 28],
+        popupAnchor: [0, -25]
+      }),
+      title: feature.properties.nombre,
+      riseOnHover: true
+    });
+  },
+
+  onEachFeature: function (feature, layer) {
+    buscarSitio.push({
+      name: layer.feature.properties.nombre,
+      source: "Seguridad",
+      id: L.stamp(layer)
+    });
+
+    layer.bindPopup(
+      "<div style='text-align:center'><h3>" +
+      '<button type="button" onclick="document.getElementById(\'nuevopolicialModal\').style.display=\'block\'; setTimeout(mapSeguridad.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevopolicialModal">C</button> ' +
+      '<a href="report/editapolicial.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
+      '<a href="report/eliminarpolicial.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
+      "<table>" +
+      "<tr><td>ID: " + feature.properties.id + "</td></tr>" +
+      "<tr><td>GID: " + feature.properties.gid + "</td></tr>" +
+      "<tr><td>ID Seguridad: " + feature.properties.id_seguridad + "</td></tr>" +
+      "<tr><td>ID Usuario: " + feature.properties.id_usuario + "</td></tr>" +
+      "<tr><td>Teléfono: " + feature.properties.telefono + "</td></tr>" +
+      "<tr><td>Dirección: " + feature.properties.direccion + "</td></tr>" +
+      "<tr><td>Tipo: " + feature.properties.tipo + "</td></tr>" +
+      "<tr><td>Nombre: " + feature.properties.nombre + "</td></tr>" +
+      "</table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
+  }
+});
+
+$.getJSON("report/policial.php", function (data) {
+  seguridadLayer.addData(data);
+  map.addLayer(seguridadLayer);
+});
+
+
+//distritos
+
+// Distritos
+
+
+// Definir los estilos de cada distrito en tonos pasteles y alta transparencia
+var districtStyles = {
+    'FRAY LUIS BELTRAN': {color: 'black', weight: 2, opacity: 1, fillColor: '#FFC1CC', fillOpacity: 0.6}, // Rosa pastel
+    'RODEO DEL MEDIO': {color: 'black', weight: 2, opacity: 1, fillColor: '#CCFFCC', fillOpacity: 0.6}, // Verde pastel
+    'SAN ROQUE': {color: 'black', weight: 2, opacity: 1, fillColor: '#CCCCFF', fillOpacity: 0.6}, // Azul pastel
+    'GENERAL ORTEGA': {color: 'black', weight: 2, opacity: 1, fillColor: '#FFFFCC', fillOpacity: 0.6}, // Amarillo pastel
+    'GENERAL GUTIERREZ': {color: 'black', weight: 2, opacity: 1, fillColor: '#FFCCFF', fillOpacity: 0.6}, // Magenta pastel
+    'TORIBIO DE LUZURIAGA': {color: 'black', weight: 2, opacity: 1, fillColor: '#CCFFFF', fillOpacity: 0.6}, // Cian pastel
+    'COQUIMBITO': {color: 'black', weight: 2, opacity: 1, fillColor: '#FFCCCC', fillOpacity: 0.6}, // Rojo pastel
+    'LUNLUNTA': {color: 'black', weight: 2, opacity: 1, fillColor: '#CCFF99', fillOpacity: 0.6}, // Verde claro pastel
+    'BARRANCAS': {color: 'black', weight: 2, opacity: 1, fillColor: '#FFE0CC', fillOpacity: 0.6}, // Naranja claro pastel
+    'MAIPU': {color: 'black', weight: 2, opacity: 1, fillColor: '#E5CCFF', fillOpacity: 0.6}, // Morado pastel
+    'RUSSELL': {color: 'black', weight: 2, opacity: 1, fillColor: '#CCE5FF', fillOpacity: 0.6}, // Azul claro pastel
+    'CRUZ DE PIEDRA': {color: 'black', weight: 2, opacity: 1, fillColor: '#E0FFCC', fillOpacity: 0.6} // Lima pastel
+};
+
+
+// Definir la capa de distritos
+var distritosLayer = L.geoJson(null, {
+  style: function (feature) {
+    return districtStyles[feature.properties.distrito] || {
+      color: "gray", // Color por defecto si el distrito no está definido
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.9,
+      dashArray: '5, 5'
+    };
+  },
+
+  onEachFeature: function (feature, layer) {
+    buscarSitio.push({
+      name: layer.feature.properties.distrito,
+      source: "Distritos",
+      id: L.stamp(layer)
+    });
+
+    layer.bindPopup(
+      
+
+      "<tr><td>Distrito: " + feature.properties.distrito + "</td></tr>" +
+
+      "</table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
+  }
+});
+
+$.getJSON("report/distritos.php", function (data) {
+  distritosLayer.addData(data);
+  map.addLayer(distritosLayer);
+});
+
+
+
+// Deportes
+
+var deportesLayer = L.geoJson(null, {
+  pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {
+      icon: L.icon({
+        iconUrl: "assets/img/depo.png", // Asegúrate de tener un ícono adecuado para deportes
+        iconSize: [24, 28],
+        iconAnchor: [12, 28],
+        popupAnchor: [0, -25]
+      }),
+      title: feature.properties.nombre,
+      riseOnHover: true
+    });
+  },
+
+  onEachFeature: function (feature, layer) {
+    buscarSitio.push({
+      name: layer.feature.properties.nombre,
+      source: "Deportes",
+      id: L.stamp(layer)
+    });
+
+    layer.bindPopup(
+      "<div style='text-align:center'><h3>" +
+      '<button type="button" onclick="document.getElementById(\'nuevodeporteModal\').style.display=\'block\'; setTimeout(mapDeporte.invalidateSize(), 1000);" class="btn btn-success" data-toggle="modal" data-target="#nuevodeporteModal">C</button> ' +
+      '<a href="report/editaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-default">U</a> ' +
+      '<a href="report/eliminaDeporte.php?codigo=' + feature.properties.id + '" class="btn btn-danger" onclick="return confirm(\'¿Seguro?\')">D</a>' +
+      "</h3><hr style='height:2px;border-width:0;color:gray;background-color:gray'></div>" +
+      "<table>" +
+      "<tr><td>ID: " + feature.properties.id + "</td></tr>" +
+      "<tr><td>GID: " + feature.properties.gid + "</td></tr>" +
+      "<tr><td>ID Deporte: " + feature.properties.id_deporte + "</td></tr>" +
+      "<tr><td>ID Usuario: " + feature.properties.id_usuario + "</td></tr>" +
+      "<tr><td>Tipo: " + feature.properties.tipo + "</td></tr>" +
+      "<tr><td>Nombre: " + feature.properties.nombre + "</td></tr>" +
+      "<tr><td>Servicios: " + feature.properties.servicios + "</td></tr>" +
+      "<tr><td>Horarios: " + feature.properties.horarios + "</td></tr>" +
+      "<tr><td>Dirección: " + feature.properties.direccion + "</td></tr>" +
+      "<tr><td>Teléfono: " + feature.properties.telefono + "</td></tr>" +
+      "<tr><td>ID Distrito: " + feature.properties.id_distrit + "</td></tr>" +
+      "</table>",
+      { minWidth: 150, maxWidth: 200 }
+    );
+  }
+});
+
+$.getJSON("report/deportes.php", function (data) {
+  deportesLayer.addData(data);
+  map.addLayer(deportesLayer);
+});
 
 
 /*
@@ -328,12 +606,15 @@ var baseLayers = {
 var groupedOverlays = {
   "Puntos de interes": {
     "<img src='assets/img/theater.png' width='24' height='28'>&nbsp;Sitios": sitios,
-    "Salud": saludLayer
+    "<img src='assets/img/salud.png' width='24' height='28'>&nbsp;Salud": saludLayer, 
+    "<img src='assets/img/policia.png' width='24' height='28'>&nbsp;Seguridad": seguridadLayer,
+    "<img src='assets/img/depo.png' width='24' height='28'>&nbsp;Deportes": deportesLayer
 	//"<img src='assets/img/planet.png' width='24' height='28'>&nbsp;Sitios de interes": sitiosLayer
   },
   "Capas": {
-  "cuadra": manzanas,
-    "Calles": calles
+  "Barrios": manzanas,
+    "Calles": calles,
+    "Distritos": distritosLayer
   }
 };
 
