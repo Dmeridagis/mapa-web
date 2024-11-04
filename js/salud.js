@@ -1,151 +1,136 @@
-var mapSalud = L.map("map5", {
-    zoom: 17,
-    center: [-33.007593020, -68.6544329100],
-     zoomControl: false,
-    attributionControl: false
-  });
-  
-  //adding drawing elements
-  var geojsalud = new L.FeatureGroup();
-  geojsonsalud.addTo(mapSalud);
-  
-  var osm4= L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              maxZoom: 21
-          }).addTo(mapSalud);
-  
- 
+var mapSalud = L.map("map6", {
+  zoom: 14,
+  center: [-33.007593020, -68.6544329100],
+  zoomControl: false,
+  attributionControl: false
+});
+
+// Añadir elementos de dibujo
+var geojsonsalud = new L.FeatureGroup();
+geojsonsalud.addTo(mapSalud);
+
+// Añadir capa de OpenStreetMap
+var osm4 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 21
+}).addTo(mapSalud);
+
+// Añadir control de búsqueda
+var osmGeocoder5 = new L.Control.OSMGeocoder({
+  collapsed: false,
+  text: 'Buscar'
+});
+mapSalud.addControl(osmGeocoder5);
+
+// Añadir barra de zoom
+var barraZoom5 = new L.Control.ZoomBar({position: 'topleft'}).addTo(mapSalud);
+
+// Añadir capas GeoJSON
+
+// Ejemplo de capa para hospitales
+var hospitales = L.geoJson(null, {
+  style: function (feature) {
+    return {
+      color: "blue",
+      fill: true,
+      opacity: 0.4,
+      clickable: true
+    };
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup("Hospital: " + feature.properties.nombre);
+  }
+}).addTo(mapSalud);
+
+$.getJSON("report/salud.php", function (data) {
+  hospitales.addData(data);
+});
+
+
+$(document).ready(function() {
+  $('#insert_form_salud').on("submit", function(event) {
+      event.preventDefault();
       
-  //adicionar busqueda
-  var osmGeocoder4 = new L.Control.OSMGeocoder({
-      collapsed: false,
-      //position: 'bottomright',
-      text: 'Buscar'
-      });
-  mapSalud.addControl(osmGeocoder4);
-  
-  var barraZoom4 = new L.Control.ZoomBar({position: 'topleft'}).addTo(mapSalud);
-  
-  
-  var manzana4 = L.geoJson(null, {
-    style: function (feature) {
-      return {
-        color: "green",
-        fill: true,
-        opacity: 0.4,
-        clickable: true
-      };
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup("Manzana: "+feature.properties.cod_mzna);
-    }	
-  }).addTo(mapSitio);
-  $.getJSON("report/manzana.php", function (data) {
-    manzana4.addData(data);
+      if ($('#dto').val() == "") {
+          alert("El departamento es requerido");
+      } else if ($('#n_ctro').val() == '') {
+          alert("El número de centro de salud es requerido");
+      } else if ($('#txtgeosalud').val() == '') {
+          alert("Las coordenadas del centro de salud son requeridas");
+      } else {
+          $.ajax({
+              url: "report/insertarsalud.php",  // Ajusta la ruta según sea necesario
+              method: "POST",
+              data: $('#insert_form_salud').serialize(),  // Serializa todos los datos del formulario
+              beforeSend: function() {
+                  $('#insertsalud').val("Actualizando...");
+              },
+              success: function(data) {
+                  alert("Respuesta del servidor: " + data);  // Mostrar la respuesta del servidor
+                  console.log("Respuesta del servidor: " + data);
+                  location.reload();
+                  window.location.href = "mapa.php";  // Redirigir a la página principal
+              }
+          });
+      }
   });
-  
-  var via3 = L.geoJson(null, {
-    style: function (feature) {
-      return {
-        color: "red",
-        fill: true,
-        opacity: 0.4,
-        clickable: true
-      };
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup("Via: "+feature.properties.via);
-    }	
-  }).addTo(mapSalud);
-  $.getJSON("report/vias.php", function (data) {
-    via3.addData(data);
-  });
-  
-  var sitio = L.geoJson(null, {
-    style: function (feature) {
-      return {
-        color: "red",
-        fill: true,
-        opacity: 0.4,
-        clickable: true
-      };
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup("Descripcion: "+feature.properties.descripcion);
-    }	
-  }).addTo(mapSalud);
-  $.getJSON("report/salud.php", function (data) {
-    salud.addData(data);
-  });
-  
-  
-  $(document).ready(function() {
-    $('#insert_form_salud').on("submit", function(event) {
-        event.preventDefault();
-        if ($('#txtdto').val() == "") {
-            alert("DTO es requerido");
-        } else if ($('#txtn_ctro').val() == '') {
-            alert("N° Centro es requerido");
-        } else if ($('#txtestratif').val() == '') {
-            alert("Estratificación es requerida");
-        } else if ($('#txtnombre').val() == '') {
-            alert("Nombre es requerido");
-        } else if ($('#txtdomicilio').val() == '') {
-            alert("Domicilio es requerido");
-        } else if ($('#txttelefono').val() == '') {
-            alert("Teléfono es requerido");
-        } else if ($('#txtgeosalud').val() == '') {
-            alert("Dibuje un centro de salud en el mapa");
-        } else {
-            $.ajax({
-                url: "report/insertarsalud.php",
-                method: "POST",
-                data: $('#insert_form_salud').serialize(),
-                beforeSend: function() {
-                    $('#insertsalud').val("Registrando");
-                },
-                success: function(data) {
-                    location.reload();
-                    window.location.href = "mapa.php";
-                }
-            });
-        }
-    });
 });
 
 
 
-  //configuring what shapes users can draw
-  var drawControl = new L.Control.Draw({
-    position: 'topright',
-    draw: {
-        polyline: false,
-        rectangle: false,
-        polygon: false,
-        circle: false,
-        marker: true
-    },
-    edit: {
-        featureGroup: geojsonSalud,
-        remove: true
-    }
+// Configuración de elementos de dibujo
+var drawControl = new L.Control.Draw({
+  position: 'topright',
+  draw: {
+    polyline: false,
+    rectangle: false,
+    polygon: false,
+    circle: false,
+    marker: true
+  },
+  edit: {
+    featureGroup: geojsonsalud,
+    remove: true
+  }
 });
-
 mapSalud.addControl(drawControl);
 
-mapSalud.on('draw:created', function(e) {
-    var type = e.layerType,
-        layer = e.layer;
-    geojsonSalud.addLayer(layer);
+// Eventos de dibujo
+
+// // Creación de un nuevo punto
+// mapSalud.on('draw:created', function (e) {
+//   var type = e.layerType,
+//   layer = e.layer;
+//   geojsonalud.addLayer(layer);
+//   $('#txtgeosalud').val(JSON.stringify(layer.toGeoJSON().geometry.coordinates));
+// });//*
+
+mapSalud.on('draw:created', function (e) {
+  var type = e.layerType,
+      layer = e.layer;
+  
+  // Añadir el punto a la capa geojsonsalud
+  geojsonsalud.addLayer(layer);
+  
+  // Obtener las coordenadas y mostrarlas en el campo de texto
+  var coordinates = layer.toGeoJSON().geometry.coordinates;
+  $('#txtgeosalud').val(JSON.stringify(coordinates));
+});
+
+
+
+// Edición de un punto
+mapSalud.on('draw:edited', function (e) {
+  var layers = e.layers;
+  layers.eachLayer(function (layer) {
     $('#txtgeosalud').val(JSON.stringify(layer.toGeoJSON().geometry.coordinates));
+  });
 });
 
-mapSalud.on('draw:edited', function(e) {
-    var layers = e.layers;
-    layers.eachLayer(function(layer) {
-        $('#txtgeosalud').val(JSON.stringify(layer.toGeoJSON().geometry.coordinates));
-    });
+// Eliminación de un punto
+mapSalud.on('draw:deleted', function () {
+  $('#txtgeosalud').val('');
 });
 
-mapSalud.on('draw:deleted', function() {
-    $('#txtgeosalud').val('');
-});
+
+
+
