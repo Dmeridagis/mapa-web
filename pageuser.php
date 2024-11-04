@@ -11,9 +11,9 @@
     <meta name="author" content="">
     <title>MAPAWEB MAIPÚ</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">  <!--EL HEADER-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">    <!--ICONOS DEL HEADER-->
+    <link rel="stylesheet" href="css/leaflet.css"> <!--EL MAPA-->
     <link rel="stylesheet" href="css/MarkerCluster.css">
     <link rel="stylesheet" href="css/MarkerCluster.Default.css">
     <link rel="stylesheet" href="css/L.Control.Locate.css">
@@ -21,12 +21,14 @@
 	<link rel="stylesheet" href="osm/Control.OSMGeocoder.css"/>
 	<link rel="stylesheet" type="text/css" href="css/L.Control.ZoomBar.css"/>
 	<link rel="stylesheet" href="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/app.css"> <!--ESTILO DEL MAPA GENERAL-->
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon-76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon-120.png">
     <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
     <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    
+
 	
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -54,6 +56,11 @@
                   <i class="fa fa-bell"></i>&nbsp;&nbsp;Realizar reclamo
               </a>
           </li>
+          <li>
+            <a href="perfil/perfil.php">
+                <img src="assets/img/user03.png" alt="perfil" width="20" height="20">&nbsp;&nbsp;Perfil
+            </a>
+          </li>
         </div>
       </div>
     </div>
@@ -76,6 +83,7 @@
                     <div class="col-md-8">
                         <!-- Aquí se mostrará el mapa -->
                         <div id="map5" style="height: 400px"></div>
+
                     </div>
                     <div class="col-md-4">
                         <form method="post" id="reclamo_form" enctype="multipart/form-data" >
@@ -93,8 +101,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="imagenReclamo">Añadir Imagen (Opcional)</label>
-                                 <input type="file" name="imagenReclamo" id="imagenReclamo" class="file-input" accept="image/*"/>
+                                <label for="imagenReclamo" class="btnrecla">Añadir Imagen (Opcional)</label>
+                                 <input type="file" name="imagenReclamo" id="imagenReclamo" style="display:none;" class="file-input" accept="image/*"/>
                             </div>
 
                             <div class="form-group">
