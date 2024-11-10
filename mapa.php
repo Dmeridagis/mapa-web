@@ -1,6 +1,7 @@
 <?php
 include 'report/seguridad.php';
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +80,8 @@ include 'report/seguridad.php';
 				<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="botonvia" onclick="document.getElementById('nuevaviaModal').style.display='block'; setTimeout(mapVia.invalidateSize(), 1000);"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Nueva via</a></li>
 				<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="botonpuntointeres" onclick="document.getElementById('nuevositioModal').style.display='block'; setTimeout(mapSitio.invalidateSize(), 1000);"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Nuevo Punto de interes</a></li>
         <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="botonsalud" onclick="document.getElementById('nuevosaludModal').style.display='block'; setTimeout(mapSalud.invalidateSize(), 1000);"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Nuevo centro de salud</a></li>     
+        <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="botonpolicial" onclick="document.getElementById('nuevopolicialModal').style.display='block'; setTimeout(mapPolicial.invalidateSize(), 1000);"><i class="fa fa-shield"></i>&nbsp;&nbsp;Nuevo punto seguridad</a></li>
+
       </ul>
             </li>
             <li class="dropdown">
@@ -227,51 +230,134 @@ include 'report/seguridad.php';
     </div></div><!-- /.modal -->
 
 
-
-
     <div class="modal fade" id="nuevosaludModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Adicionar Centro de Salud</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div id="map6" style="height: 400px"></div>
+          </div>
+          <div class="col-md-5">
+          <form method="post" id="insert_form_salud">
+    <div class="form-group">
+        <label for="txtcodigo">Código</label>
+        <input type="text" name="txtcodigo" id="txtcodigo" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label for="dto">Departamento</label>
+        <input type="text" name="dto" id="dto" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="n_ctro">N° Centro</label>
+        <input type="text" name="n_ctro" id="n_ctro" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="estratif">Estratificación</label>
+        <input type="text" name="estratif" id="estratif" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" name="domicilio" id="domicilio" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="geom">Geometría (dibuje en el mapa)</label>
+        <textarea name="geom" id="txtgeosalud" class="form-control" readonly required></textarea>
+    </div>
+    <button type="submit" name="insertsalud" id="insertsalud" class="btn btn-success">Adicionar</button>
+</form>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="nuevopolicialModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Adicionar</h4>
-          </div>
-          <div class="modal-body">
-
-			<div class="row">
-                <div class="col-md-8">
-					<div id="map4" style="height: 400px"></div>
-				</div>
-				<div class="col-md-4">
-					<form method="post" id="insert_form_salud">
-						<label>Codigo</label>
-						<input type="text" name="txtcodigo" id="txtcodigo" class="form-control"  readonly />
-						<br />
-						<label>Tipo</label>
-						<input type="text" name="txttipositio" id="txttipositio" class="form-control" placeholder="BALLET" />
-						<br />
-						<label>Nombre</label>
-						<input type="text" name="txtnombresitio" id="txtnombresitio" class="form-control"  placeholder="DANIEL MERIDA"/>
-						<br />
-						<label>Coordenadas</label>
-						<textarea name="txtgeositio" id="txtgeositio" class="form-control" readonly></textarea>
-						<br />
-						<input type="submit" name="insertsitio" id="insertsitio" value="Adicionar" class="btn btn-success" />
-					</form>
-				</div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div></div><!-- /.modal -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Adicionar Punto Policial</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="mapPolicial" style="height: 400px"></div>
+                    </div>
+                    <div class="col-md-5">
+                        <form method="post" id="insert_form_policial">
+                            <div class="form-group">
+                                <label for="codigo">Código</label>
+                                <input type="text" name="codigo" id="codigo" class="form-control" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label for="gid">GID</label>
+                                <input type="text" name="gid" id="gid" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="id_segurid">ID Seguridad</label>
+                                <input type="text" name="id_segurid" id="id_segurid" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="id_usuario">ID Usuario</label>
+                                <input type="text" name="id_usuario" id="id_usuario" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="text" name="telefono" id="telefono" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección</label>
+                                <input type="text" name="direccion" id="direccion" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo">Tipo</label>
+                                <input type="text" name="tipo" id="tipo" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" name="nombre" id="nombre" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="geom">Geometría (dibuje en el mapa)</label>
+                                <textarea name="geom" id="txtgeopolicial" class="form-control" readonly required></textarea>
+                            </div>
+                            <button type="submit" name="insertpolicial" id="insertpolicial" class="btn btn-success">Adicionar</button>
+                        </form>
+                        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
     <script src="assets/js/app.js"></script>
 	<script src="js/mapa.js"></script>
 	<script src="js/via.js"></script>
+  <script src="js/salud.js"></script>
 	<script src="js/sitio.js"></script>
+  <script src="js/policial.js"></script>
 	
 
   </body>
