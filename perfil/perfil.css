@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
     background-color: rgb(152, 215, 240);
+    font-family: poppins static;
 }
 ol, ul {
 	list-style: none;
@@ -51,12 +52,12 @@ header{
     display: flex;
     justify-content: space-between;
     background-color: white;
-    height: 50px;
+    height: 30px;
     align-items: center;
     padding: 20px;
 }
 #logo{
-    font-family: Roboto;
+    
     font-size: x-large;
 }
 nav ul li{
@@ -67,7 +68,7 @@ nav ul li a{
     text-decoration: none;
     color: rgb(34, 174, 216);
     font-size: 17px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
     padding: 7px 13px;
 }
 nav a:hover{
@@ -92,12 +93,13 @@ nav a:hover{
     ul{
         position: fixed;
         width:100%;
-        height: 100vh;
-        background-color: rgb(42, 42, 250);
-        top: 85px;
+        height: 60vh;
+        background-color: #3D5EEC;
+        top: 70px;
         left: -100%;
         text-align: center;
-        transition: all .5s;
+        
+        
     }
     nav ul li{
         display: block;
@@ -106,6 +108,7 @@ nav a:hover{
     }
     nav ul li a{
         font-size: 18px;
+        color: black;
     }
     #check:checked ~ ul {
         left: 0;
@@ -122,7 +125,7 @@ nav a:hover{
 }
 .userinfo h2{
     padding-top: 30px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
     font-size: larger;
 }
 .userinfo p{
@@ -148,10 +151,11 @@ nav a:hover{
    margin-left: 10%;
    border-radius: 7%;
    text-align: center;
+   overflow-x: hidden;
 }
 .listrecla h2{
     padding-top: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
     font-size: larger;
 }
 .tiprecla1{
@@ -212,7 +216,11 @@ td {
     }
     .listrecla{
         width: 80%;
+        overflow-x: auto;
     }
+    .listrecla::-webkit-scrollbar {
+        display: none;
+      }
     .tiprecla1{
         margin-top: 20px;
         margin-left: 10px;
