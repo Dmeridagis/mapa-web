@@ -42,6 +42,7 @@ if (!$result) {
     <link rel="stylesheet" href="perfil.css">
     <script src="https://kit.fontawesome.com/0273d565ab.js" crossorigin="anonymous"></script>
     <title>Mi perfil</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -55,7 +56,6 @@ if (!$result) {
                 <li><a href="perfil.php">Perfil</a></li>
                 <li><a href="perfil.php">Reclamos</a></li>
                 <li><a href="../pageuser.php">Mapa</a></li>
-                <li><a href="#">Inicio</a></li>
             </ul>
         </nav>
     </header>
