@@ -12,6 +12,7 @@
     <title>MAPAWEB MAIPÚ</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">  <!--EL HEADER-->
+    <link rel="stylesheet" href="perfil/custom.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">    <!--ICONOS DEL HEADER-->
     <link rel="stylesheet" href="css/leaflet.css"> <!--EL MAPA-->
     <link rel="stylesheet" href="css/MarkerCluster.css">
@@ -42,25 +43,42 @@
 	<script src="js/leaflet.draw.js" type="text/javascript"></script>
 	<script src="osm/Control.OSMGeocoder.js"></script>
     <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+    <script src="https://kit.fontawesome.com/0273d565ab.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">MAPAWEB MAIPÚ</a>
-    
-          <li><a href="report/cerrar.php" ><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;Cerrar sesión</a></li>
-          <li>
-              <a href="#" id="realizarReclamo" data-toggle="modal" data-target="#reclamoModal">
-                  <i class="fa fa-bell"></i>&nbsp;&nbsp;Realizar reclamo
-              </a>
-          </li>
-          <li>
+            
+          <h1 class="nav-logo">MUNI</h1>
+
+          <label for="menu" class="nav-label">
+             <i class="fa-solid fa-bars"></i>
+          </label>
+          <input type="checkbox" class="nav-input" id="menu">
+
+        <div class="nav-menu">
+
+        <li class="nav-item">
             <a href="perfil/perfil.php">
-                <img src="assets/img/user03.png" alt="perfil" width="20" height="20">&nbsp;&nbsp;Perfil
+              <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Perfil
             </a>
           </li>
+
+          <li class="nav-item">
+              <a href="#" id="realizarReclamo" data-toggle="modal" data-target="#reclamoModal">
+              <i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;Realizar reclamo
+              </a>
+          </li>
+
+          <li class="nav-item">
+              <a href="report/cerrar.php" >
+                    <i class="fa-solid fa-door-closed"></i>&nbsp;&nbsp;Cerrar sesión
+               </a>
+          </li>
+          </div>
+
         </div>
       </div>
     </div>
