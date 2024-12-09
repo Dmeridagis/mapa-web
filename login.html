@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Iniciar sesión</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="Shortcut Icon" type="image/x-icon" href="assets/icons/book.ico" /> <!--ESTO ES EL LOGO DE LA PESTAÑA-->
+  <link rel="stylesheet" href="css/material-design-iconic-font.min.css"> <!--ICONOS DEL DIV DE LOGIN-->
+  <link rel="stylesheet" href="css/normalize.css"> <!--ES PARA QUE LOS ELEMENTOS "FUNCIONEN" EN CUALQUIER NAVEGADOR-->
+
+  <link rel="stylesheet" href="css/login.css"><!--ESTILO DE LA PAGINA-->
+  <script src="https://kit.fontawesome.com/0273d565ab.js" crossorigin="anonymous"></script>
+  <script src="js/modernizr.js"></script> <!--QUE SEA COMPATIBLE CON CUALQUIER NAVEGADOR-->
+</head>
+
+<body> <!--El Fondo-->
+  <div class="imgmuni">
+    <img src="assets/img/imgmuni.png" alt="">
+    <br> <br>
+    <h2>¡¡Bienvenido a la web municipal de Maipú!!</h2>
+  </div>
+
+  <div id="container"> <!--CONTIENE EL FORMULARIO-->
+    <img src="assets/img/logomaipu.png" style="height: 100px; width: 100px; margin-top: 10px;">
+    <section class="cont-form">
+      <form autocomplete="off" method="post" action="report/valida.php">
+        <h3 style="text-align: center;">Inicia sesión con tu cuenta </h3><br>
+        <div class="group-material-login">
+          <label>Nombre y apellido</label>
+          <input type="text" class="material-login-control" required="" maxlength="20" name="txtusuario">
+        </div><br>
+        <!--ESTA ES LA CONTRASEÑA-->
+        <div class="group-material-login">
+          <label>Contraseña</label>
+          <input type="password" class="material-login-control" required="" maxlength="20" name="txtclave">
+        </div> <br>
+        <button class="btn-login" type="submit">Ingresar al sistema</button>
+        <p>¿No tienes una cuenta? <a href="registro.html">Registrarse</a></p>
+      </form>
+    </section>
+  </div>
+  <div>
+
+  </div>
+
+</body>
+
+</html>
