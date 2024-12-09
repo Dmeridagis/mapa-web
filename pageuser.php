@@ -23,11 +23,8 @@
 	<link rel="stylesheet" type="text/css" href="css/L.Control.ZoomBar.css"/>
 	<link rel="stylesheet" href="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
     <link rel="stylesheet" href="assets/css/app.css"> <!--ESTILO DEL MAPA GENERAL-->
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon-76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
-    <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="Icon" href="assets/img/logomaipu2.png">
+    
     
 
 	
@@ -50,7 +47,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-            
+            <img src="assets/img/logomaipu.png">
           <h1 class="nav-logo">MUNI</h1>
 
           <label for="menu" class="nav-label">
@@ -104,14 +101,20 @@
 
                     </div>
                     <div class="col-md-4">
-                        <form method="post" id="reclamo_form" enctype="multipart/form-data" >
+                        <form autocomplete="off" method="post" id="reclamo_form" enctype="multipart/form-data" >
                             <div class="form-group">
                                 <label for="txtFechaReclamo">Fecha</label>
                                 <input type="date" name="txtFechaReclamo" id="txtFechaReclamo" class="form-control" min="2024-01-01"required />
                             </div>
                             <div class="form-group">
                                 <label for="txtTipoReclamo">Tipo de Reclamo</label>
-                                <input type="text" name="txtTipoReclamo" id="txtTipoReclamo" class="form-control" placeholder="Tipo de Reclamo" required />
+                                <select name="txtTipoReclamo" id="txtTipoReclamo" class="form-control" required >
+                                <option value="">Selecciona un tipo de reclamo</option>
+                                    <option value="Salud">Salud</option>
+                                     <option value="Deportes">Deportes</option>
+                                     <option value="Seguridad">Seguridad</option>
+                                     <option value="Vias">Vias</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="txtDetalleReclamo">Detalles del Reclamo</label>
@@ -144,7 +147,7 @@
 </div><!-- /.modal -->
 
 
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app1.js"></script>
 	<script src="js/mapa.js"></script>
 	<script src="js/reclamos.js"></script>
   </body>
