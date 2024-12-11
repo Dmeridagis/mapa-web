@@ -19,10 +19,27 @@ if (count($w) > 0) {
     $resultado = ejecutar($q); // Asume que la función 'ejecutar' inserta los datos en la base de datos
 
     if ($resultado) {
-        echo "<script>alert('Registro exitoso!'); document.location.href='../pageuser.php';</script>";
+        // Obtener el ID del nuevo usuario para iniciar sesión automáticamente
+        // Suponiendo que el ID es autoincremental
+        $q = "SELECT id FROM public.usuarios WHERE email='$email' AND usuario='$usuario' LIMIT 1";
+        $resultado_usuario = consultar($q);
+
+        if (count($resultado_usuario) > 0) {
+            $id_vecino = $resultado_usuario[0]['id'];
+
+            // Iniciar la sesión y almacenar el ID del usuario
+            session_start();  // Iniciar la sesión
+            $_SESSION['id_vecino'] = $id_vecino;  // Guardar el ID del usuario en la sesión
+
+            // Redirigir al perfil del usuario
+            echo "<script>alert('Registro exitoso!'); document.location.href='../pageuser.php';</script>";
+        } else {
+            echo "<script>alert('Error al obtener el ID del usuario.'); document.location.href='../registro.html';</script>";
+        }
     } else {
         echo "<script>alert('Error en el registro, por favor intente de nuevo.');
         document.location.href='../registro.html';</script>";
     }
 }
 ?>
+
