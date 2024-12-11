@@ -12,7 +12,7 @@
     <title>MAPAWEB MAIPÚ</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">  <!--EL HEADER-->
-    <link rel="stylesheet" href="perfil/custom.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">    <!--ICONOS DEL HEADER-->
     <link rel="stylesheet" href="css/leaflet.css"> <!--EL MAPA-->
     <link rel="stylesheet" href="css/MarkerCluster.css">
@@ -113,7 +113,7 @@
                                     <option value="Salud">Salud</option>
                                      <option value="Deportes">Deportes</option>
                                      <option value="Seguridad">Seguridad</option>
-                                     <option value="Vias">Vias</option>
+                                     <option value="Sitios">Sitios</option>
                                 </select>
                             </div>
                             <div class="form-group">
