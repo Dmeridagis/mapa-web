@@ -38,35 +38,66 @@ if (!$result) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="perfil.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/bootstrap.min.css">  <!--HEADER-->
+    <link rel="stylesheet" href="../css/login.css">
     <script src="https://kit.fontawesome.com/0273d565ab.js" crossorigin="anonymous"></script>
     <title>Mi perfil</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="Icon" href="../assets/img/logomaipu2.png">
 </head>
 <body>
-    <header>
-        <h1 id="logo">MUNI</h1>
-        <nav>
-            <input type="checkbox" name="check" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fa-solid fa-bars"></i>
-            </label>
-            <ul>
-                <li><a href="perfil.php">Perfil</a></li>
-                <li><a href="perfil.php">Reclamos</a></li>
-                <li><a href="../pageuser.php">Mapa</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <img src="../assets/img/logomaipu.png" class="logoimg2">
+          <h1 class="nav-logo2">MUNI</h1>
+
+          <label for="menu" class="nav-label">
+             <i class="fa-solid fa-bars"></i>
+          </label>
+          <input type="checkbox" class="nav-input" id="menu">
+
+        <div class="nav-menu">
+
+        <li class="nav-item">
+            <a href="perfil.php">
+              <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Perfil
+            </a>
+          </li>
+
+          <li class="nav-item">
+              <a href="#">
+              <i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;Reclamos
+              </a>
+          </li>
+
+          <li class="nav-item">
+              <a href="../pageuser.php" >
+              <i class="fa-solid fa-map"></i>&nbsp;&nbsp;Mapa
+               </a>
+          </li>
+          </div>
+
+        </div>
+      </div>
+    </div>
     
     <!-- Sección de información del usuario -->
     <div class="contenedor">
         <section class="userinfo">
+            <div class="datos">
             <h2>Información del perfil</h2>
+            <img src="../assets/img/perfiluser.png" alt="">
             <p><strong>Nombre de usuario: <br></strong> <?php echo htmlspecialchars($usuario['usuario']); ?></p>
             <p><strong>Correo: <br></strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
             <button onclick="window.location.href='../report/cerrar.php';" id="cerrarbtn">Cerrar Sesión</button>
+            </div>
         </section>
 
         <div class="listrecla">
@@ -76,57 +107,50 @@ if (!$result) {
             <button class="tiprecla2">En Proceso</button>
             <button class="tiprecla3">Resueltos</button>
             </div>
-            <div class="scroll-table">
-            <table class="reclamos">
-                <thead>
-                <tr>
-                    <th>Mensaje</th>
-                    <th>Fecha</th>
-                    <th>Imagen</th>
-                </tr>
-                </thead>
-                <?php
-                // Verificar si hay resultados
-                if (pg_num_rows($result) > 0) {
-                    while ($row = pg_fetch_assoc($result)) {
-                        $mensajeTipo = htmlspecialchars($row['tipo']);
-                        $mensaje = htmlspecialchars($row['mensaje']);
-                        $n_reclamo = htmlspecialchars($row['n_reclamo']);
-                        $fecha = date('Y-m-d H:i', strtotime($row['fecha']));
-                        $imagen = $row['imagen'] ? 'data:image/jpeg;base64,' . base64_encode(pg_unescape_bytea($row['imagen'])) : '';
+            
+            <div class="reclamos-container">
+    <?php
+    if (pg_num_rows($result) > 0) {
+        while ($row = pg_fetch_assoc($result)) {
+            $mensajeTipo = htmlspecialchars($row['tipo']);
+            $mensaje = htmlspecialchars($row['mensaje']);
+            $n_reclamo = htmlspecialchars($row['n_reclamo']);
+            $fecha = date('Y-m-d H:i', strtotime($row['fecha']));
+            $imagen = $row['imagen'] ? 'data:image/jpeg;base64,' . base64_encode(pg_unescape_bytea($row['imagen'])) : '';
 
-                        echo "<tr>";
-                        echo "<td class='clickable' onclick=\"mostrarModal('$mensaje', '$fecha', '$imagen','$n_reclamo')\">$mensajeTipo</td>";
-                        echo "<td>$fecha</td>";
-                        echo "<td>";
-                        if ($row['imagen']) {
-                            echo "<img src='$imagen' alt='Imagen' width='100'>";
-                        } else {
-                            echo "No hay imagen";
-                        }
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='3'>No hay reclamos registrados</td></tr>";
-                }
-                desconectar();
-                ?>
-            </table>
-            </div>
+            echo "<div class='card-reclamo'>";
+            echo "<h3>$mensajeTipo</h3>";
+            echo "<p><strong>Fecha y hora:</strong> $fecha</p>";
+            echo "<p>$mensaje</p>";
+            if ($row['imagen']) {
+                echo "<img src='$imagen' alt='Imagen' class='reclamo-img'>";
+            } else {
+                echo "<p>No hay imagen</p>";
+            }
+            
+            echo "<button class='btn-detalle' onclick=\"mostrarModal('$mensaje', '$fecha', '$imagen', '$n_reclamo')\">Ver Detalles</button>";
+            echo "</div>";
+        }
+    } else {
+        echo "<p>No hay reclamos registrados</p>";
+    }
+    desconectar();
+    ?>
+</div>
+
         </div>
     </div>
 
     <!-- Modal -->
-    <div id="miModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close" onclick="cerrarModal()">&times;</span>
+    <div id="miModal" class="modal2" style="display: none;">
+        <div class="modal-content2">
+            <span class="close2" onclick="cerrarModal()">&times;</span>
             <div>
             <p><strong>Mensaje:</strong> <span id="mensajeModal"></span></p>
-            <p><strong>Fecha:</strong> <span id="fechaModal"></span></p>
+            <p><strong>Fecha y hora:</strong> <span id="fechaModal"></span></p>
             <p><strong>N°Reclamo:</strong> <span id="numeroModal"></span></p>
             </div>
-            <div class="imgmodal">
+            <div class="imgmodal2">
             <img id="imagenModal" src="" alt="Imagen del reclamo" style="display: none; width: 155px;">
             </div>
         </div>
