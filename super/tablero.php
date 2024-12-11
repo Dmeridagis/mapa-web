@@ -45,7 +45,7 @@ if ($query_profile->rowCount() > 0) {
    <div class="box-container">
 
       <div class="box">
-         <h3>Bienvenido!</h3>
+         <h3>¡Bienvenido!</h3>
          <p><?= htmlspecialchars($fetch_profile['nombre_usuario']); ?></p>
          <a href="actu_perfil.php" class="btn">Actualizar Perfil</a>
       </div>
