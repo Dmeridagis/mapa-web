@@ -16,7 +16,7 @@ conectar();
 $id_vecino = $_SESSION['id_vecino']; // Obtener el ID del usuario desde la sesión
 
 // Consulta para obtener los datos del usuario (nombre y correo)
-$sql_usuario = "SELECT usuario, email FROM public.usuarios WHERE id = '$id_vecino'";
+$sql_usuario = "SELECT usuario, email, dni, direccion, fechanac FROM public.usuarios WHERE id = '$id_vecino'";
 $result_usuario = pg_query($cnx, $sql_usuario);
 
 if (!$result_usuario || pg_num_rows($result_usuario) == 0) {
@@ -96,6 +96,9 @@ if (!$result) {
             <img src="../assets/img/perfiluser.png" alt="">
             <p><strong>Nombre de usuario: <br></strong> <?php echo htmlspecialchars($usuario['usuario']); ?></p>
             <p><strong>Correo: <br></strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
+            <p><strong>Domicilio: <br></strong> <?php echo htmlspecialchars($usuario['direccion']); ?></p>
+            <p><strong>DNI: <br></strong> <?php echo htmlspecialchars($usuario['dni']); ?></p>
+            <p><strong>Fecha de nacimiento: <br></strong> <?php echo htmlspecialchars($usuario['fechanac']); ?></p>
             <button onclick="window.location.href='../report/cerrar.php';" id="cerrarbtn">Cerrar Sesión</button>
             </div>
         </section>
