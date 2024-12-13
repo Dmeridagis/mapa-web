@@ -5,6 +5,9 @@ include 'libreria.php';
 $usuario = $_POST['txtusuario'];
 $email = $_POST['txtemail'];
 $clave = $_POST['txtclave'];
+$direccion = $_POST['txtdireccion'];
+$fechanac = $_POST['txtfechanac'];
+$dni = $_POST['txtdni'];
 
 // Verificar si el usuario ya existe
 $q = "SELECT * FROM public.usuarios WHERE usuario='$usuario' OR email='$email'";
@@ -15,7 +18,7 @@ if (count($w) > 0) {
     document.location.href='../registro.html';</script>";
 } else {
     // Insertar el nuevo usuario en la base de datos
-    $q = "INSERT INTO public.usuarios (usuario, email, clave, estado) VALUES ('$usuario', '$email', '$clave', 1)";
+    $q = "INSERT INTO public.usuarios (usuario, email, clave, estado, direccion, fechanac, dni) VALUES ('$usuario', '$email', '$clave', 1, '$direccion', '$fechanac', '$dni')";
     $resultado = ejecutar($q); // Asume que la función 'ejecutar' inserta los datos en la base de datos
 
     if ($resultado) {
