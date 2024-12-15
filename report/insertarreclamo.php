@@ -43,6 +43,15 @@ if (isset($_FILES['imagenReclamo']) && $_FILES['imagenReclamo']['error'] == 0) {
 $cadenaCoordenadas = str_replace(",", " ", $coordenadas);
 $punto = 'POINT(' . $cadenaCoordenadas . ')';
 
+// Convertimos las coordenadas ingresadas (latitud,longitud) a (longitud,latitud)
+$coordenadas = $_POST['txtgeoreclamo'];
+
+// Dividir las coordenadas para verificar el orden
+list($latitud, $longitud) = explode(",", $coordenadas);
+
+// Reordenar para crear el formato esperado por PostGIS
+$punto = 'POINT(' . $longitud . ' ' . $latitud . ')';
+
 // Insertar el reclamo en la base de datos
 $sql = "INSERT INTO public.reclamos_vecinos (id_vecino, n_reclamo, tipo, mensaje, imagen, fecha, id_distrito, geom) 
         VALUES ('$id_vecino', '$n_reclamo', '$tipoReclamo', '$detalleReclamo', " . ($imagen ? "'$imagen'" : "NULL") . ", NOW(), '$id_distrito', ST_GeomFromText('$punto', 4326))";
