@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/logomaipu2.png" />
+    <title>MapaMuni</title>
+  
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <div class="nav__bar">
+          <div class="logo">
+            <a href="#"><img src="assets/LOGO.png" alt="logo" /></a>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#">Perfil</a></li>
+          <li><a href="#">Reclamos</a></li>
+          <li><a href="#">MapaWeb</a></li>
+          <li><a href="#service">Servicios</a></li>
+        </ul>
+      </nav>
+      <div class="section__container header__container" id="home">
+        <p>SIEMPRE CONECTADOS</p>
+        <h1>Estamos para ti <br />somos <span>MapaMuni</span>.</h1>
+      </div>
+    </header>
+
+    <section class="section__container booking__container">
+      <form action="/" class="booking__form">
+        <div class="input__group">
+          <span><i class="ri-calendar-2-fill"></i></span>
+          <div>
+            <label for="check-in">NUEVAS OBRAS</label>
+
+          </div>
+        </div>
+        <div class="input__group">
+          <span><i class="ri-calendar-2-fill"></i></span>
+          <div>
+            <label for="check-out">NUEVAS CAPACITACIONES</label>
+
+          </div>
+        </div>
+        <div class="input__group">
+          <span><i class="ri-user-fill"></i></span>
+          <div>
+            <label for="guest">MÁS COMUNIDAD</label>
+
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="section__container about__container" id="about">
+      <div class="about__image">
+        <img src="assets/about.jpg" alt="about" />
+      </div>
+      <div class="about__content">
+        <p class="section__subheader">SOBRE NOSOTROS</p>
+        <h2 class="section__header">¡Las mejor para ti esta con nosotros!</h2>
+        <p class="section__description">
+          "En el corazón de nuestra comunidad. Estamos comprometidos con el bienestar de nuestros ciudadanos y el desarrollo de nuestra ciudad.
+          Tu municipio trabajando para ti. Una ciudad más limpia, segura y con mejores oportunidades.
+          Servicios municipales al alcance de todos. Facilidades, seguridad y bienestar para tu familia."
+        </p>
+      </div>
+    </section>
+
+    <section class="section__container room__container" id="obras">
+      <p class="section__subheader">NUESTRAS OBRAS MÁS RECIENTES</p>
+      <h2 class="section__header">Un nuevo comienzo para nuestra comunidad.</h2>
+      <div class="room__grid">
+        <div class="room__card">
+          <div class="room__card__image">
+            <img src="assets/room-1.jpg" alt="room" />
+            <div class="room__card__icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room__card__details">
+            <h4>Infraestructura de Hospital</h4>
+            <p>
+              Invertimos en tu salud. Estas obras son una muestra de nuestro compromiso con tu bienestar.
+            </p>
+            <h5>Finaliza <span>06/03/2025</span></h5>
+            <button class="btn">¡Proximamente!</button>
+          </div>
+        </div>
+        <div class="room__card">
+          <div class="room__card__image">
+            <img src="assets/room-2.jpg" alt="room" />
+            <div class="room__card__icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room__card__details">
+            <h4>Campaña de Reciclaje</h4>
+            <p>
+              Juntos podemos hacer la diferencia. Reciclar es invertir en un futuro sostenible para todos.
+            </p>
+            <h5>Desde <span>12/12/2024</span></h5>
+            <button class="btn">¡En Proceso!</button>
+          </div>
+        </div>
+        <div class="room__card">
+          <div class="room__card__image">
+            <img src="assets/room-3.jpg" alt="room" />
+            <div class="room__card__icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room__card__details">
+            <h4>Nueva Plaza Central</h4>
+            <p>
+              Un espacio para todos. Disfruta de áreas verdes, juegos infantiles y eventos culturales.
+            </p>
+            <h5>Desde <span>15/01/2025</span></h5>
+            <button class="btn">¡Proximamente!</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service" id="service">
+      <div class="section__container service__container">
+        <div class="service__content">
+          <p class="section__subheader">SERVICIOS</p>
+          <h2 class="section__header">Nos esforzamos para darte lo mejor.</h2>
+          <ul class="service__list">
+            <li>
+              <span><i class="ri-shield-star-line"></i></span>
+              Seguridad de primera calidad
+            </li>
+            <li>
+              <span><i class="ri-24-hours-line"></i></span>
+              24 Horas de servico 
+            </li>
+            <li>
+              <span><i class="ri-headphone-line"></i></span>
+              Sistema de reclamos vecinal
+            </li>
+            <li>
+              <span><i class="ri-map-2-line"></i></span>
+              Mapa con puntos de interés
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container banner__container">
+      <div class="banner__content">
+        <div class="banner__card">
+          <h4>15+</h4>
+          <p>Nuevas Obras</p>
+        </div>
+        <div class="banner__card">
+          <h4>250+</h4>
+          <p>Jovenes Capacitados</p>
+        </div>
+        <div class="banner__card">
+          <h4>400+</h4>
+          <p>Casas con Cloacas</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore" id="explore">
+      <p class="section__subheader">EXPLORAR</p>
+      <h2 class="section__header">¿Qué hay de nuevo hoy?</h2>
+      <div class="explore__bg">
+        <div class="explore__content">
+          <p class="section__description">10 de Diciembre 2024</p>
+          <h4>Abrimos un nuevo Teatro en la Calle 3.</h4>
+          <button class="btn">Teatro Cote</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" id="contact">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="logo">
+            <a href="#home"><img src="assets/LOGO.png" alt="logo" /></a>
+          </div>
+          <p class="section__description">
+            Descubre nuestra ciudad renovada. Nuevas calles, plazas y espacios públicos para disfrutar en familia.
+          </p>
+          <button class="btn">DISFRUTA</button>
+        </div>
+        <div class="footer__col">
+          <h4>ENLACES RÁPIDOS</h4>
+          <ul class="footer__links">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#obras">Obras</a></li>
+            <li><a href="#service">Servicios</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>NUESTROS SERVICIOS</h4>
+          <ul class="footer__links">
+            <li><a href="#">Reclamos Vecinales</a></li>
+            <li><a href="#">Mapa Web</a></li>
+            <li><a href="#">Seguridad Municipal</a></li>
+            <li><a href="#">Sanidad</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>CONTACTANOS</h4>
+          <ul class="footer__links">
+            <li><a href="#">MapaMuni@info.com</a></li>
+          </ul>
+          <div class="footer__socials">
+            <a href="#"><img src="assets/facebook.png" alt="facebook" /></a>
+            <a href="#"><img src="assets/instagram.png" alt="instagram" /></a>
+            <a href="#"><img src="assets/youtube.png" alt="youtube" /></a>
+            <a href="#"><img src="assets/twitter.png" alt="twitter" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2024 Gabriel Rios. Derechos Reservados.
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
