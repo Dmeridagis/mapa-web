@@ -68,7 +68,7 @@ section{
    display: block;
    width: 100%;
    margin-top: 1rem;
-   border-radius: .5rem;
+   border-radius: 13px;
    padding:1rem 3rem;
    font-size: 1.7rem;
    text-transform: capitalize;
@@ -136,7 +136,7 @@ section{
    box-shadow: var(--box-shadow);
    text-align: center;
    color:var(--red);
-   border-radius: .5rem;
+   border-radius: 15px;
    font-size: 2rem;
    text-transform: capitalize;
 }
@@ -159,7 +159,7 @@ section{
    text-align: center;
    box-shadow:0px 8px 15px rgba(0, 0, 0, 0.3) ;
    background-color: var(--white);
-   border-radius: .90rem;
+   border-radius: 15px;
    width: 50rem;
    border: none ;
 }
@@ -175,7 +175,7 @@ section{
    font-size: 1.8rem;
    color:var(--light-color);
    margin-bottom: 1rem;
-   border-radius: .5rem;
+   border-radius: 15px;
 }
 
 .form-container form p span{
@@ -185,7 +185,7 @@ section{
 .form-container form .box{
    width: 100%;
    margin:1rem 0;
-   border-radius: .90rem;
+   border-radius: 15px;
    background-color: var(--light-bg);
    padding:1.4rem;
    font-size: 1.8rem;
@@ -242,7 +242,7 @@ section{
    position: absolute;
    top:120%; right:2rem;
    background-color: var(--white);
-   border-radius: .5rem;
+   border-radius: 10px;
    box-shadow: var(--box-shadow);
    border:var(--border);
    padding:2rem;
@@ -280,7 +280,7 @@ section{
    text-align: center;
    border: none; /* Elimina el borde */
    box-shadow: 7px 10px 10px rgba(0, 0, 0, 0.2); /* Aumenta el sombreado */
-   border-radius: .5rem;
+   border-radius: 15px;
    background-color: var(--white);
 }
 
@@ -295,7 +295,7 @@ section{
 
 .dashboard .box-container .box p {
    padding: 1.3rem;
-   border-radius: .5rem;
+   border-radius: 15px;
    background-color: var(--light-bg);
    font-size: 1.7rem;
    color: var(--light-color);
@@ -317,7 +317,7 @@ section{
    border:none;
    background-color: var(--white);
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra fuerte */
-   border-radius: 5px; /* Esquinas redondeadas */
+   border-radius: 15px; /* Esquinas redondeadas */
 }
 
 .accounts .box-container .box p{
@@ -341,7 +341,7 @@ section{
 .contacts .box-container .box{
    padding:2rem;
    padding-top: 1rem;
-   border-radius: .5rem;
+   border-radius: 15px;
    border:var(--border);
    background-color: var(--white);
    box-shadow: var(--box-shadow);
